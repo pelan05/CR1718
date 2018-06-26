@@ -25,6 +25,10 @@ public class Diagnostico {
 		return nodulo.get(i);
 	}
 	
+	public void addNodulo(Nodulo nod) {
+		this.nodulo.add(nod);
+	}
+	
 	public int getNodulos() {
 		return nodulo.size();
 	}
