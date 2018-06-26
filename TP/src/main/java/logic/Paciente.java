@@ -7,15 +7,17 @@ public class Paciente {
 	public String nome;
 	public int idade; 
 	ArrayList <Diagnostico> diagnostico;
-	ArrayList <Tratamento> tratamento;
+	public String nomeTratamento;
+	public char stage;						//0, A, B, C, D
 	
 	public Paciente() {
 		//input nome & idade through GUI
 		//temp
-		nome = "Jose";
-		idade = 43;
-		//diagnostico.add(new Diagnostico());
-		//tratamento.add(new Tratamento());
+		nome = "temp";
+		idade = 0;
+		diagnostico = null;
+		nomeTratamento = "undefined";
+		stage = '0';
 		
 	}
 	
@@ -46,18 +48,23 @@ public class Paciente {
 	public int getDiagnosticos() {
 		return diagnostico.size();
 	}
-	
-	public Tratamento getTratamento(int i) {
-		return tratamento.get(i);
+
+	public String getNomeTratamento() {
+		return nomeTratamento;
 	}
-	
-	public void addTratamento() {
-		this.tratamento.add(new Tratamento());
+
+	public void setNomeTratamento (String nome) {
+		this.nomeTratamento = nome;
 	}
-	
-	public int getTratamentos() {
-		return tratamento.size();
+
+	public char getStage() {
+		return stage;
 	}
-	
-	
+
+	public void setStage(char stage) {
+		//verificação 0, A, B, C, D (char)
+		//temp
+		this.stage = stage;
+	}
+
 }

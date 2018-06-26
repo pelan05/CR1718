@@ -8,9 +8,6 @@ import logic.*;
 import GUI.*;
 
 
-/**
- * This is a sample class to launch a rule.
- */
 public class DroolsTest {
 
 	
@@ -19,7 +16,12 @@ public class DroolsTest {
         
     	Paciente paciente = new Paciente();
     	//Graphical gui = new Graphical();
+    	String defaultPath = "ficheiros/paciente.txt";
     	
+    	//gui da pull nisto
+    	//e o path tem que ser escolhido na gui
+    	//temp
+    	new LoadFile(paciente, defaultPath);
     	
     	
     	try {
