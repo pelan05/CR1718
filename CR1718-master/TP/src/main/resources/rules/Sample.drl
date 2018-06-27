@@ -54,3 +54,4 @@ salience 90
 				System.out.println("NO CANCER");
 end
 
+rule ""

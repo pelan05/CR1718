@@ -64,6 +64,8 @@ public class Paciente {
 	public void setStage(char stage) {
 		//verificação 0, A, B, C, D (char)
 		//temp
+		if (stage != '0' || stage != 'A' || stage != 'B' || stage != 'C' || stage != 'D')
+			return;
 		this.stage = stage;
 	}
 
