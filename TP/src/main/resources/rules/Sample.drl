@@ -9,3 +9,49 @@ rule "nome"
 
 end
 */
+
+rule "Paciente nao tem tamanho registado
+salience 100
+	when 
+		$p:Paciente (diagnostico.nodulo.tamanho == NULL)
+	then
+		// get size
+end
+
+rule "Paciente tem 1 nodulo menor de 1cm"
+salience 90
+	when
+		$p:Paciente( diagnostico.nodulo.tamanho < 1)
+	then
+		System.out.println("Repetir ultra-som em 4 meses);
+end
+
+rule "Paciente tem nodulo entre 1 a 2 cm"
+salience 90	
+	when
+		$p:Paciente( diagnostico.nodulo.tamanho > 1 || diagnostico.nodulo.tamanho < 2)
+	then
+		if (p.diagnostico.fourPhaseCT >= 1)
+			System.out.println("BIG CANCER");
+		else
+			if(p.diagnostico.biopsia == TRUE)
+				System.out.println("BIG CANCER");
+			else
+				System.out.println("NO CANCER");
+end
+
+rule "Paciente tem nodulo maior ou igual a 2 cm"
+salience 90	
+	when
+		$s:Paciente ( diagnostico.nodulo.tamanho >= 2)
+	then
+		if	(p.diagnostico.fourPhaseCT >= 1)
+			System.out.println("BIG CANCER");
+		else
+			if(p.diagnostico.biopsia == TRUE)
+				System.out.println("BIG CANCER");
+			else
+				System.out.println("NO CANCER");
+end
+
+rule ""
