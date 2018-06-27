@@ -18,6 +18,9 @@ public class LoadFile {
 		this.temp = null;
 		this.diagnostico = new Diagnostico();
 		this.nodulo = new Nodulo();
+		
+		load();
+		print();
 	}
 	
 	
@@ -72,14 +75,15 @@ public class LoadFile {
 	            System.err.println("Unable to open file");
 	        } catch (IOException ex){
 	            System.err.println("Error reading file");
-	        } catch (NullPointerException ex){
-	            System.err.println("LoadQuestions: Invalid path");
 	        }
 	    
 	}
 	
 	
-	
+	public void print() {
+		
+		System.out.println(p.nome);
+	}
 	
 	
 	

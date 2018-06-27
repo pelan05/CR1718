@@ -13,6 +13,7 @@ public class Data {
 	protected LocalDateTime d;
 	
 	public Data() {
+		d = LocalDateTime.now();
 		m = d.getMinute();
 		h = d.getHour();
 		dd = d.getDayOfMonth();
