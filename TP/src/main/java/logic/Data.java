@@ -10,14 +10,14 @@ public class Data {
 	public int mm;
 	public int aaaa;
 	
-	protected LocalDateTime data;
+	protected LocalDateTime d;
 	
 	public Data() {
-		m = data.getMinute();
-		h = data.getHour();
-		dd = data.getDayOfMonth();
-		mm = data.getMonthValue();
-		aaaa = data.getYear();		
+		m = d.getMinute();
+		h = d.getHour();
+		dd = d.getDayOfMonth();
+		mm = d.getMonthValue();
+		aaaa = d.getYear();		
 	}
 
 	public int getMin() {

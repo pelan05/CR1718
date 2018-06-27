@@ -1,10 +1,11 @@
 package com.sample
  
 import com.sample.DroolsTest.Message;
- 
-rule /*nome*/
+ /*
+rule "nome"
     when
 
     then
 
 end
+*/

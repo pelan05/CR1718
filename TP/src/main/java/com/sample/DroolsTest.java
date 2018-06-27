@@ -1,11 +1,11 @@
 package com.sample;
 
-import org.kie.api.KieServices;
+//import org.kie.api.KieServices;
 
-import org.kie.api.runtime.KieContainer;
-import org.kie.api.runtime.KieSession;
+//import org.kie.api.runtime.KieContainer;
+//import org.kie.api.runtime.KieSession;
 import logic.*;
-import GUI.*;
+//import GUI.*;
 
 
 public class DroolsTest {
@@ -22,7 +22,7 @@ public class DroolsTest {
     	//e o path tem que ser escolhido na gui
     	//temp
     	new LoadFile(paciente, defaultPath);
-    	
+    	/*
     	
     	try {
             // load up the knowledge base
@@ -35,7 +35,7 @@ public class DroolsTest {
             t.printStackTrace();
         
         }
-    
+    	*/
     
     
     

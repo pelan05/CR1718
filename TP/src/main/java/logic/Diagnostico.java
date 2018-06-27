@@ -19,8 +19,8 @@ public class Diagnostico {
 	public boolean needsHelp;
 	
 	public Diagnostico() {
-		nodulo.add(new Nodulo());
-		data = new Data();
+		nodulo = null;
+		data = new Data();			//ATENÇÂO//data fica sempre com data do sistema, falta implementar SETs e implementar data no ficheiro
 		resultado = false;
 		fourPhaseCT = 0;
 		biopsia = false;	
