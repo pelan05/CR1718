@@ -11,6 +11,7 @@ public class Diagnostico {
 	public int fourPhaseCT;			//0..4
 	public boolean biopsia;			//positivo ou negativo
 	
+	public boolean portalSpread;
 	public boolean hasAssociatedDiseases;
 	public boolean feelsWell;
 	public boolean liverWorksNormally;
@@ -25,6 +26,7 @@ public class Diagnostico {
 		fourPhaseCT = 0;
 		biopsia = false;	
 		
+		portalSpread = false;
 		hasAssociatedDiseases = false;
 		feelsWell = false;
 		liverWorksNormally = false;
@@ -122,6 +124,14 @@ public class Diagnostico {
 
 	public void setNeedsHelp(boolean needsHelp) {
 		this.needsHelp = needsHelp;
+	}
+
+	public boolean isPortalSpread() {
+		return portalSpread;
+	}
+
+	public void setPortalSpread(boolean portalSpread) {
+		this.portalSpread = portalSpread;
 	}
 	
 	

@@ -9,3 +9,91 @@ rule "nome"
 
 end
 */
+
+rule "Paciente nao tem tamanho registado
+salience 100
+	when 
+		$p:Paciente (diagnostico.nodulo.tamanho == NULL)
+	then
+		// get size
+end
+
+rule "Paciente tem 1 nodulo menor de 1cm"
+salience 90
+	when
+		$p:Paciente( diagnostico.nodulo.tamanho < 1)
+	then
+		System.out.println("Repetir ultra-som em 4 meses);
+end
+
+rule "Paciente tem nodulo entre 1 a 2 cm"
+salience 90	
+	when
+		$p:Paciente( diagnostico.nodulo.tamanho > 1 || diagnostico.nodulo.tamanho < 2)
+	then
+		if (p.diagnostico.fourPhaseCT >= 1)
+			System.out.println("BIG CANCER");
+		else
+			if(p.diagnostico.biopsia == TRUE)
+				System.out.println("BIG CANCER");
+			else
+				System.out.println("NO CANCER");
+end
+
+rule "Paciente tem nodulo maior ou igual a 2 cm"
+salience 90	
+	when
+		$p:Paciente ( diagnostico.nodulo.tamanho >= 2)
+	then
+		if	(p.diagnostico.fourPhaseCT >= 1)
+			System.out.println("BIG CANCER");
+		else
+			if(p.diagnostico.biopsia == TRUE)
+				System.out.println("BIG CANCER");
+			else
+				System.out.println("NO CANCER");
+end
+
+rule "Very early stage single"
+salience 80
+	when
+		$d:Diagnostico (nodulo.size()==1)
+	then
+		if (d.portalPressure == false)
+			System.out.println("RESSECTION");
+		else
+			if (d.hasAssossiatedDiseases == false)
+				System.out.println("TRANSPLANT");
+			else
+				System.out.println("Radiofrequency ablation");
+end
+
+rule "Very early stage multiple"
+salience 80
+	when
+		$d:Diagnostico (nodulo.size()>1)
+	then
+		if (d.hasAssossiatedDiseases == false)
+			System.out.println("TRANSPLANT");
+		else
+			System.out.println("Radiofrequency ablation");
+end
+
+rule "Early stage"
+salience 80
+	when
+		$d:Diagnostico (nodulo.size()>1)
+	then
+		if (d.hasAssossiatedDiseases == false)
+			System.out.println("TRANSPLANT");
+		else
+			System.out.println("Radiofrequency ablation");
+end
+
+rule "Intermediate stage"
+salience 80
+	when
+		//
+	then
+		//
+end

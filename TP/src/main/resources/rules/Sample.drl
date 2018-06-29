@@ -43,7 +43,7 @@ end
 rule "Paciente tem nodulo maior ou igual a 2 cm"
 salience 90	
 	when
-		$s:Paciente ( diagnostico.nodulo.tamanho >= 2)
+		$p:Paciente ( diagnostico.nodulo.tamanho >= 2)
 	then
 		if	(p.diagnostico.fourPhaseCT >= 1)
 			System.out.println("BIG CANCER");
@@ -54,4 +54,46 @@ salience 90
 				System.out.println("NO CANCER");
 end
 
-rule ""
+rule "Very early stage single"
+salience 80
+	when
+		$d:Diagnostico (nodulo.size()==1)
+	then
+		if (d.portalPressure == false)
+			System.out.println("RESSECTION");
+		else
+			if (d.hasAssossiatedDiseases == false)
+				System.out.println("TRANSPLANT");
+			else
+				System.out.println("Radiofrequency ablation");
+end
+
+rule "Very early stage multiple"
+salience 80
+	when
+		$d:Diagnostico (nodulo.size()>1)
+	then
+		if (d.hasAssossiatedDiseases == false)
+			System.out.println("TRANSPLANT");
+		else
+			System.out.println("Radiofrequency ablation");
+end
+
+rule "Early stage"
+salience 80
+	when
+		$d:Diagnostico (nodulo.size()>1)
+	then
+		if (d.hasAssossiatedDiseases == false)
+			System.out.println("TRANSPLANT");
+		else
+			System.out.println("Radiofrequency ablation");
+end
+
+rule "Intermediate stage"
+salience 80
+	when
+		//
+	then
+		//
+end
