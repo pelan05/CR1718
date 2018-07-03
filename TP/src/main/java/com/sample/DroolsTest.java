@@ -17,18 +17,18 @@ public class DroolsTest {
     	Paciente paciente = new Paciente();
     	String defaultPath = "ficheiros/paciente.txt";
     	InterfaceUI interfaceUi;
-    	String choice;
+    	String choice = "";
     	
     	
     	do{System.out.println("Qual o metodo de inicializacao?");
     	System.out.println("'ficheiro' ou 'manual'");
     	
-    	choice = sc.nextLine();
-    	}while(choice != "ficheiro" || choice != "manual");
+    	choice = sc.next();
+    	}while(!choice.equals("ficheiro") && !choice.equals("manual"));
     	
     	if(choice == "ficheiro"){
     		new LoadFile(paciente, defaultPath);
-    	}else {
+    	}else{
     		new InterfaceUI(paciente);
     	}
     	

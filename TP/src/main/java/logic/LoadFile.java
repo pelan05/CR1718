@@ -82,12 +82,11 @@ public class LoadFile {
 	    
 	}
 	
-	
+
 	public void print() {
 		
 		System.out.println(p.nome);
 	}
-	
 	
 	
 }
