@@ -12,19 +12,13 @@ rule "nome"
 end
 */
 
-rule "Paciente nao tem tamanho registado"
-salience 100
-	when 
-		$p:Paciente (diagnostico.size() == 0)
-	then
-		Scanner sc = new Scanner(System.in);
-		float i = sc.nextFloat();
-end
+// REGRAS SEM DIAGNOSTICOS ANTERIORES
 
 rule "Paciente tem 1 nodulo menor de 1cm"
 salience 90
 	when
-		forall($n: Nodulo (tamanho < 1))
+		$p:Paciente (historico.size() == 1)
+		$d:Diagnostico(nodulo.size() == 1 && nodulo.get(0) < 1)
 	then
 		System.out.println("Repetir ultra-som em 4 meses");
 end
@@ -32,12 +26,13 @@ end
 rule "Paciente tem nodulo entre 1 a 2 cm"
 salience 90	
 	when
-		$p:Paciente( diagnostico.nodulo.tamanho > 1 || diagnostico.nodulo.tamanho < 2)
+		$p:Paciente (historico.size() == 1)
+		forall($n:Nodulo(getTam()>=1 && getTam()<2))
 	then
-		if (p.diagnostico.fourPhaseCT >= 1)
+		if (p.historico.fourPhaseCT >= 1)
 			System.out.println("BIG CANCER");
 		else
-			if(p.diagnostico.biopsia == TRUE)
+			if(p.historico.biopsia == TRUE)
 				System.out.println("BIG CANCER");
 			else
 				System.out.println("NO CANCER");
@@ -46,12 +41,13 @@ end
 rule "Paciente tem nodulo maior ou igual a 2 cm"
 salience 90	
 	when
-		$p:Paciente ( diagnostico.nodulo.tamanho >= 2)
+		$p:Paciente (historico.size() == 1)
+		$p:Paciente (historico.nodulo.tamanho >= 2)
 	then
-		if	(p.diagnostico.fourPhaseCT >= 1)
+		if	(p.historico.fourPhaseCT >= 1)
 			System.out.println("BIG CANCER");
 		else
-			if(p.diagnostico.biopsia == TRUE)
+			if(p.historico.biopsia == TRUE)
 				System.out.println("BIG CANCER");
 			else
 				System.out.println("NO CANCER");
@@ -60,6 +56,7 @@ end
 rule "Very early stage single"
 salience 80
 	when
+		$p:Paciente (historico.size() == 1)
 		$p:Paciente (stage.getStage()=='0')
 		$d:Diagnostico (nodulo.size()==1)
 	then
@@ -75,6 +72,7 @@ end
 rule "Very early stage multiple"
 salience 80
 	when
+		$p:Paciente (historico.size() == 1)
 		$p:Paciente (stage.getStage()=='0')
 		$d:Diagnostico (nodulo.size()>1)
 	then
@@ -87,6 +85,7 @@ end
 rule "Early stage"
 salience 80
 	when
+		$p:Paciente (historico.size() == 1)
 		$p:Paciente (stage.getStage()=='A')
 		$d:Diagnostico (nodulo.size()>1)
 	then
@@ -99,6 +98,7 @@ end
 rule "Intermediate stage"
 salience 80
 	when
+		$p:Paciente (historico.size() == 1)
 		$p:Paciente (stage.getStage()=='B')
 	then
 		System.out.println("Transarterial chemoembolization for liver cancer.");
@@ -107,6 +107,7 @@ end
 rule "Advanced stage"
 salience 80
 	when
+		$p:Paciente (historico.size() == 1)
 		$p:Paciente (stage.getStage()=='C')
 	then
 		System.out.println("Sorafenib");
@@ -115,7 +116,10 @@ end
 rule "Terminal stage"
 salience 80
 	when 
+		$p:Paciente (historico.size() == 1)
 		$p:Paciente (stage.getStage()=='D')
 	then
 		System.out.println("Best supportive care");
 end
+
+// REGRAS QUANDO EXISTIREM DIAGNOSTICOS ANTERIORES
