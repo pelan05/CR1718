@@ -7,28 +7,56 @@ public class InterfaceUI {
 
 
 	Scanner sc;
-	
-	Paciente p;
+
 	String path;
 	Diagnostico diagnostico;
 	Nodulo nodulo;
 	String temp;
 	int tam;
+	String choice;
+	
+	String defaultPathNovo;
+	String defaultPathOld;
+	
+
+	LoadFile file;
 	
 	
 	public InterfaceUI(Paciente paciente) {
 		
 		this.sc = new Scanner(System.in);
-		this.p = paciente;
 		this.temp = null;
 		this.diagnostico = new Diagnostico();
 		this.nodulo = new Nodulo();
 		this.tam = 0;
+		this.choice = "";
 		
+		this.defaultPathNovo = "ficheiros/paciente.txt";
+		
+		this.file = new LoadFile(paciente, defaultPathNovo);
 		
 	}
 	
-	public void pedeTudo() {
+	public void start(Paciente p) {
+			
+			do{System.out.println("Qual o metodo de inicializacao?");
+        	System.out.println("'ficheiro' ou 'manual'");
+        	
+        	choice = sc.next();
+        	}while(!choice.equals("ficheiro") && !choice.equals("manual"));
+        	
+        	if(choice == "ficheiro"){
+        		file.load(p);
+        	}else{
+            	pedeTudo(p);
+        	}
+    	
+		
+		}
+	
+	
+	
+	public void pedeTudo(Paciente p) {
 		System.out.println("Qual o nome do paciente?");
 		p.nome = sc.next();
 		System.out.println("Qual a idade do paciente?");
@@ -50,6 +78,9 @@ public class InterfaceUI {
 		System.out.println("A biopsia deu resultado positivo? (true/false)");
 		diagnostico.biopsia = sc.nextBoolean();
 		
+		System.out.println("Portal Spread cresceu? (true/false)");
+		diagnostico.portalSpread = sc.nextBoolean();
+		
 		System.out.println("O doente tem doenças associadas? (true/false)");
 		diagnostico.hasAssociatedDiseases = sc.nextBoolean();
 		
@@ -70,5 +101,10 @@ public class InterfaceUI {
 	}
 	
 	
+	public void imprimeResultado(Paciente p) {
+		System.out.println("O paciente " + p.getNome() + " com " + p.getIdade() + " anos de idade tem Stage " + p.getStage() + " de BCLC.");
+		System.out.println("O tratamento recomendado é " + p.getNomeTratamento());
+		
+	}
 	
 }

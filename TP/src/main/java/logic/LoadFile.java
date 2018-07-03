@@ -3,8 +3,6 @@ package logic;
 import java.io.*;
 
 public class LoadFile {
-
-	Paciente p;
 	String path;
 	Diagnostico diagnostico;
 	Nodulo nodulo;
@@ -14,7 +12,6 @@ public class LoadFile {
 	
 	public LoadFile(Paciente d, String pat) {
 		
-		this.p = d;
 		this.path = pat;
 		this.temp = null;
 		this.diagnostico = new Diagnostico();
@@ -24,7 +21,7 @@ public class LoadFile {
 	}
 	
 	
-	public void load() {
+	public void load(Paciente p) {
 		 try{
 	            FileReader fr = new FileReader(path);
 	            BufferedReader br = new BufferedReader(fr);
@@ -50,6 +47,9 @@ public class LoadFile {
 	            
 	            temp = br.readLine();
 	            diagnostico.biopsia = Boolean.parseBoolean(temp);					//biopsia
+	            
+	            temp = br.readLine();
+	            diagnostico.portalSpread = Boolean.parseBoolean(temp);				//portalSpread
 	            
 	            temp = br.readLine();
 	            diagnostico.hasAssociatedDiseases = Boolean.parseBoolean(temp);		//hasAssociatedDiseases
@@ -80,10 +80,6 @@ public class LoadFile {
 	    
 	}
 
-	public void loadAntigo() {
-		
-		
-	}
 	
 	
 }
