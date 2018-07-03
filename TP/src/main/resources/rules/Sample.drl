@@ -57,6 +57,7 @@ end
 rule "Very early stage single"
 salience 80
 	when
+		$p:Paciente (stage.getStage()=='0')
 		$d:Diagnostico (nodulo.size()==1)
 	then
 		if (d.portalPressure == false)
@@ -71,6 +72,7 @@ end
 rule "Very early stage multiple"
 salience 80
 	when
+		$p:Paciente (stage.getStage()=='0')
 		$d:Diagnostico (nodulo.size()>1)
 	then
 		if (d.hasAssossiatedDiseases == false)
@@ -82,6 +84,7 @@ end
 rule "Early stage"
 salience 80
 	when
+		$p:Paciente (stage.getStage()=='A')
 		$d:Diagnostico (nodulo.size()>1)
 	then
 		if (d.hasAssossiatedDiseases == false)
@@ -93,7 +96,23 @@ end
 rule "Intermediate stage"
 salience 80
 	when
-		//
+		$p:Paciente (stage.getStage()=='B')
 	then
-		//
+		System.out.println("Transarterial chemoembolization for liver cancer.");
+end
+
+rule "Advanced stage"
+salience 80
+	when
+		$p:Paciente (stage.getStage()=='C')
+	then
+		System.out.println("Sorafenib");
+end
+
+rule "Terminal stage"
+salience 80
+	when 
+		$p:Paciente (stage.getStage()=='D')
+	then
+		System.out.println("Best supportive care");
 end
