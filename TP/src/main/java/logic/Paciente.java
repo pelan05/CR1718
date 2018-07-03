@@ -36,11 +36,15 @@ public class Paciente {
 	}
 	
 	public Diagnostico getDiagnostico(int i) {
-		return historico.get(i);
+		return historico.get( i );
+	}
+	
+	public Diagnostico getLastDiag() {
+		return historico.get( historico.size() - 1 );
 	}
 	
 	public void addDiagnostico(Diagnostico diag) {
-		this.historico.add(diag);
+		this.historico.add( diag );
 	}
 	
 	public int getSizeHistorico() {

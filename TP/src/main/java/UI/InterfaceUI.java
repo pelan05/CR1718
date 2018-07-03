@@ -1,9 +1,7 @@
 package UI;
 
 import java.util.Scanner;
-
 import logic.*;
-
 
 public class InterfaceUI {
 
