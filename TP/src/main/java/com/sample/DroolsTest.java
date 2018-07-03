@@ -15,22 +15,37 @@ public class DroolsTest {
         
     	Scanner sc = new Scanner(System.in);
     	Paciente paciente = new Paciente();
-    	String defaultPath = "ficheiros/paciente.txt";
-    	InterfaceUI interfaceUi;
+    	String defaultPathNovo = "ficheiros/paciente.txt";
+    	String defaultPathOld = "ficheiros/paciente.txt";
+    	InterfaceUI interfaceUi = new InterfaceUI(paciente);
+    	LoadFile file = new LoadFile(paciente, defaultPathNovo);
     	String choice = "";
     	
     	
-    	do{System.out.println("Qual o metodo de inicializacao?");
-    	System.out.println("'ficheiro' ou 'manual'");
+    	do{System.out.println("Carregar Paciente guardado?");
+    	System.out.println("'sim' ou 'nao'");
     	
     	choice = sc.next();
-    	}while(!choice.equals("ficheiro") && !choice.equals("manual"));
+    	}while(!choice.equals("sim") && !choice.equals("nao"));
     	
-    	if(choice == "ficheiro"){
-    		new LoadFile(paciente, defaultPath);
+    	if(choice == "sim"){
+    		file.loadAntigo();
     	}else{
-    		new InterfaceUI(paciente);
+    		do{System.out.println("Qual o metodo de inicializacao?");
+        	System.out.println("'ficheiro' ou 'manual'");
+        	
+        	choice = sc.next();
+        	}while(!choice.equals("ficheiro") && !choice.equals("manual"));
+        	
+        	if(choice == "ficheiro"){
+        		file.load();
+        	}else{
+            	interfaceUi.pedeTudo();
+        	}
     	}
+    	
+    	
+    	
     	
     	
     	try {

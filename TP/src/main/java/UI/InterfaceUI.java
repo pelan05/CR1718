@@ -27,8 +27,6 @@ public class InterfaceUI {
 		this.nodulo = new Nodulo();
 		this.tam = 0;
 		
-		pedeTudo();
-		print();
 		
 	}
 	
@@ -73,13 +71,6 @@ public class InterfaceUI {
 		diagnostico.needsHelp = sc.nextBoolean();
 	}
 	
-	
-	
-
-	public void print() {
-		
-		System.out.println(p.nome);
-	}
 	
 	
 }

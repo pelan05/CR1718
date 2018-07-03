@@ -21,8 +21,6 @@ public class LoadFile {
 		this.nodulo = new Nodulo();
 		this.tam = 0;
 		
-		load();
-		print();
 	}
 	
 	
@@ -81,11 +79,10 @@ public class LoadFile {
 	        }
 	    
 	}
-	
 
-	public void print() {
+	public void loadAntigo() {
 		
-		System.out.println(p.nome);
+		
 	}
 	
 	

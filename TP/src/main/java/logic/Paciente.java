@@ -6,16 +6,14 @@ import java.util.ArrayList;
 public class Paciente {
 	public String nome;
 	public int idade; 
-	public ArrayList <Diagnostico> diagnostico;
+	public ArrayList<Diagnostico> historico;
 	public String nomeTratamento;
-	public char stage;						//0, A, B, C, D
+	public char stage;							//0, A, B, C, D
 	
 	public Paciente() {
-		//input nome & idade through GUI
-		//temp
 		nome = "temp";
 		idade = 0;
-		diagnostico = new ArrayList <Diagnostico> ();
+		historico = new ArrayList <Diagnostico> ();
 		nomeTratamento = "undefined";
 		stage = '0';
 		
@@ -38,15 +36,15 @@ public class Paciente {
 	}
 	
 	public Diagnostico getDiagnostico(int i) {
-		return diagnostico.get(i);
+		return historico.get(i);
 	}
 	
 	public void addDiagnostico(Diagnostico diag) {
-		this.diagnostico.add(diag);
+		this.historico.add(diag);
 	}
 	
-	public int getDiagnosticos() {
-		return diagnostico.size();
+	public int getSizeHistorico() {
+		return historico.size();
 	}
 
 	public String getNomeTratamento() {
