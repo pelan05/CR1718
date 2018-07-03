@@ -1,6 +1,6 @@
 package logic;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class Data {
 	
@@ -9,16 +9,18 @@ public class Data {
 	public int dd;
 	public int mm;
 	public int aaaa;
-	
-	protected LocalDateTime d;
-	
+
+
 	public Data() {
-		d = LocalDateTime.now();
-		m = d.getMinute();
-		h = d.getHour();
-		dd = d.getDayOfMonth();
-		mm = d.getMonthValue();
-		aaaa = d.getYear();		
+
+		ZonedDateTime zdt = ZonedDateTime.now();
+		
+		
+		m = zdt.getMinute();
+		h = zdt.getHour();
+		dd = zdt.getDayOfMonth();
+		mm = zdt.getMonthValue();
+		aaaa = zdt.getYear();		
 	}
 
 	public int getMin() {

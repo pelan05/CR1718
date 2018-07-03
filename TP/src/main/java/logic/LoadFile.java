@@ -9,6 +9,7 @@ public class LoadFile {
 	Diagnostico diagnostico;
 	Nodulo nodulo;
 	String temp;
+	int tam;
 	
 	
 	public LoadFile(Paciente d, String pat) {
@@ -18,6 +19,7 @@ public class LoadFile {
 		this.temp = null;
 		this.diagnostico = new Diagnostico();
 		this.nodulo = new Nodulo();
+		this.tam = 0;
 		
 		load();
 		print();
@@ -36,11 +38,12 @@ public class LoadFile {
 	            p.idade = Integer.parseInt(temp);									//idade
 	            
 	            temp = br.readLine();												//NumNodulos
-	            for(int i = 0; i < Integer.parseInt(temp); i++) {
+	            tam = Integer.parseInt(temp);
+	            for(int i = 0; i < tam; i++) {
 	            	temp = br.readLine();
-	            	nodulo.tamanho = Float.valueOf(temp);							//TamNodulo
+	            	this.nodulo.setTam(Float.valueOf(temp));						//TamNodulo
 	            	temp = br.readLine();
-		            nodulo.isGrowing = Boolean.parseBoolean(temp);					//isGrowing
+		            this.nodulo.setGrowing(Boolean.parseBoolean(temp));				//isGrowing
 		            diagnostico.addNodulo(nodulo);
 	            }
 	            
