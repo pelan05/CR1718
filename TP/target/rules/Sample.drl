@@ -1,7 +1,9 @@
 package com.sample
+
+import logic.*;
+import java.util.Scanner;
  
-import com.sample.DroolsTest.Message;
- /*
+  /*
 rule "nome"
     when
 
@@ -10,20 +12,21 @@ rule "nome"
 end
 */
 
-rule "Paciente nao tem tamanho registado
+rule "Paciente nao tem tamanho registado"
 salience 100
 	when 
-		$p:Paciente (diagnostico.nodulo.tamanho == NULL)
+		$p:Paciente (diagnostico.size() == 0)
 	then
-		// get size
+		Scanner sc = new Scanner(System.in);
+		float i = sc.nextFloat();
 end
 
 rule "Paciente tem 1 nodulo menor de 1cm"
 salience 90
 	when
-		$p:Paciente( diagnostico.nodulo.tamanho < 1)
+		forall($n: Nodulo (tamanho < 1))
 	then
-		System.out.println("Repetir ultra-som em 4 meses);
+		System.out.println("Repetir ultra-som em 4 meses");
 end
 
 rule "Paciente tem nodulo entre 1 a 2 cm"

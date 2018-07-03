@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Paciente {
 	public String nome;
 	public int idade; 
-	ArrayList <Diagnostico> diagnostico;
+	public ArrayList <Diagnostico> diagnostico;
 	public String nomeTratamento;
 	public char stage;						//0, A, B, C, D
 	
