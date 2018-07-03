@@ -29,10 +29,10 @@ salience 90
 		$p:Paciente (historico.size() == 1)
 		forall($n:Nodulo(getTam()>=1 && getTam()<2))
 	then
-		if (p.historico.fourPhaseCT >= 1)
+		if ($p.historico.get(0).getFourPhaseCT() >= 1)
 			System.out.println("BIG CANCER");
 		else
-			if(p.historico.biopsia == TRUE)
+			if($p.historico.get(0).getBiopsia() == true)
 				System.out.println("BIG CANCER");
 			else
 				System.out.println("NO CANCER");
@@ -42,28 +42,46 @@ rule "Paciente tem nodulo maior ou igual a 2 cm"
 salience 90	
 	when
 		$p:Paciente (historico.size() == 1)
-		$p:Paciente (historico.nodulo.tamanho >= 2)
+		forall($n:Nodulo(getTam()>= 2))
 	then
-		if	(p.historico.fourPhaseCT >= 1)
+		if	($p.historico.get(0).getFourPhaseCT()>= 1)
 			System.out.println("BIG CANCER");
 		else
-			if(p.historico.biopsia == TRUE)
+			if($p.historico.get(0).getBiopsia() == true)
 				System.out.println("BIG CANCER");
 			else
 				System.out.println("NO CANCER");
 end
 
+rule "Stage 0"
+salience 85
+	when
+		$p:Paciente(historico.size() == 1, 
+		historico.get(0).getNodulos() == 1, 
+		historico.get(0).getNodulo().getTam()<2, 
+		getFeelsWell()==true && getLiverWorksNormally()==true);
+	then
+		$p.setStage('0');
+end
+
+rule "Stage A"
+salience 85
+	when
+		$p:Paciente(
+	then
+end
+
 rule "Very early stage single"
 salience 80
 	when
-		$p:Paciente (historico.size() == 1)
-		$p:Paciente (stage.getStage()=='0')
-		$d:Diagnostico (nodulo.size()==1)
+		$p:Paciente ( getSizeHistorico == 1)
+		p:Paciente (getStage()== '0')
+		$d:Diagnostico (nodulo.size()== 1)
 	then
-		if (d.portalPressure == false)
+		if ($d.getPortalPressure() == false)
 			System.out.println("RESSECTION");
 		else
-			if (d.hasAssossiatedDiseases == false)
+			if (d.getHasAssociatedDiseases() == false)
 				System.out.println("TRANSPLANT");
 			else
 				System.out.println("Radiofrequency ablation");
@@ -73,10 +91,10 @@ rule "Very early stage multiple"
 salience 80
 	when
 		$p:Paciente (historico.size() == 1)
-		$p:Paciente (stage.getStage()=='0')
+		p:Paciente (stage.getStage()=='0')
 		$d:Diagnostico (nodulo.size()>1)
 	then
-		if (d.hasAssossiatedDiseases == false)
+		if (d.getHasAssossiatedDiseases() == false)
 			System.out.println("TRANSPLANT");
 		else
 			System.out.println("Radiofrequency ablation");
