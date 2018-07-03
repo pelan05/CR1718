@@ -1,12 +1,11 @@
 package com.sample;
 
-//import org.kie.api.KieServices;
-
-//import org.kie.api.runtime.KieContainer;
-//import org.kie.api.runtime.KieSession;
+import org.kie.api.KieServices;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 import logic.*;
-//import GUI.*;
-
+import UI.InterfaceUI;
+import java.util.*;
 
 public class DroolsTest {
 
@@ -14,15 +13,25 @@ public class DroolsTest {
 	
     public static final void main(String[] args) {
         
+    	Scanner sc = new Scanner(System.in);
     	Paciente paciente = new Paciente();
-    	//Graphical gui = new Graphical();
     	String defaultPath = "ficheiros/paciente.txt";
+    	InterfaceUI interfaceUi;
+    	String choice;
     	
-    	//gui da pull nisto
-    	//e o path tem que ser escolhido na gui
-    	//temp
-    	new LoadFile(paciente, defaultPath);
-    	/*
+    	
+    	do{System.out.println("Qual o metodo de inicializacao?");
+    	System.out.println("'ficheiro' ou 'manual'");
+    	
+    	choice = sc.nextLine();
+    	}while(choice != "ficheiro" || choice != "manual");
+    	
+    	if(choice == "ficheiro"){
+    		new LoadFile(paciente, defaultPath);
+    	}else {
+    		new InterfaceUI(paciente);
+    	}
+    	
     	
     	try {
             // load up the knowledge base
@@ -35,7 +44,7 @@ public class DroolsTest {
             t.printStackTrace();
         
         }
-    	*/
+    	
     
     
     
