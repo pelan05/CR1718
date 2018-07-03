@@ -20,7 +20,7 @@ public class Diagnostico {
 	public boolean needsHelp;
 	
 	public Diagnostico() {
-		nodulo = null;
+		nodulo = new ArrayList <Nodulo>();
 		data = new Data();			//ATENÇÂO//data fica sempre com data do sistema, falta implementar SETs e implementar data no ficheiro
 		resultado = false;
 		fourPhaseCT = 0;

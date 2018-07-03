@@ -15,7 +15,7 @@ public class Paciente {
 		//temp
 		nome = "temp";
 		idade = 0;
-		diagnostico = null;
+		diagnostico = new ArrayList <Diagnostico> ();
 		nomeTratamento = "undefined";
 		stage = '0';
 		
