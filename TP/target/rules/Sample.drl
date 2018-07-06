@@ -21,6 +21,7 @@ salience 90
 		$d:Diagnostico(getNodulos() == 1 && getNodulo(0).getTam() < 1)
 	then
 		System.out.println("Repetir ultrassom em 4 meses");
+		$p.setNomeTratamento("Inconclusivo, repetir ultrassom em 4 meses");
 end
 
 rule "Paciente tem nodulo entre 1 a 2 cm"
@@ -29,7 +30,7 @@ salience 90
 		$p:Paciente ()
 		forall($n:Nodulo(getTam()>=1 && getTam()<2))
 	then
-		if ($p.historico.get(0).getFourPhaseCT() >= 1){
+		if ($p.historico.get(0).getFourPhaseCT() >= 2){
 			System.out.println("HCC1");
 			$p.getLastDiag().setResultado(true);
 		}else
@@ -39,7 +40,7 @@ salience 90
 			}else{
 				System.out.println("Inconclusivo!");
 				System.out.println("Repetir ultrassom em 4 meses");
-				$p.setNomeTratamento("Repetir ultrassom e 4 meses");
+				$p.setNomeTratamento("Inconclusivo, repetir ultrassom em 4 meses");
 		}
 end
 
@@ -58,7 +59,7 @@ salience 90
 				$p.getLastDiag().setResultado(true);
 			}else{
 				System.out.println("Inconclusivo!");
-				System.out.println("Repetir ultrassom em 4 meses");
+				$p.setNomeTratamento("Inconclusivo, repetir ultrassom em 4 meses");
 		}
 end
 
@@ -66,7 +67,7 @@ rule "Stage 0"
 salience 85
 	when
 		$p:Paciente(getLastDiag().getNodulos() == 1, 
-		getLastDiag().getNodulo(0).getTam()<2, 
+		getLastDiag().getNodulo(0).getTam() <= 2, 
 		getLastDiag().getFeelsWell()==true && getLastDiag().getLiverWorksNormally()==true)
 	then
 		$p.setStage('0');
@@ -95,7 +96,8 @@ rule "Stage B"
 salience 85
 	when
 		$p:Paciente(getStage()!='0' && getStage()!='A')
-			Paciente(getDiagnostico(0).getFeelsWell()==true && getDiagnostico(0).getLiverWorksNormally()==true)
+		   Paciente(getDiagnostico(0).getFeelsWell()==true && getDiagnostico(0).getLiverWorksNormally()==true)
+		   Paciente(getLastDiag().getNodulos() < 1)
 	then
 		$p.setStage('B');
 end
@@ -103,7 +105,8 @@ end
 rule "Stage C"
 salience 85
 	when
-		$p:Paciente((getDiagnostico(0).getHasSpread() == true || getDiagnostico(0).getFeelsWell() == false) && getDiagnostico(0).getLiverWorksNormally()==true) 
+		$p:Paciente((getDiagnostico(0).getHasSpread() == true || getDiagnostico(0).getFeelsWell() == false) && getDiagnostico(0).getLiverWorksNormally()==true)
+		   Paciente(getLastDiag().getNodulos() < 1) 
 	then
 		$p.setStage('C');
 end
@@ -112,6 +115,7 @@ rule "Stage D"
 salience 85
 	when
 		$p:Paciente(getDiagnostico(0).getSevereLiverDamage == true || getDiagnostico(0).getNeedsHelp == true)
+		   Paciente(getLastDiag().getNodulos() < 1)
 	then
 		$p.setStage('D');
 end
@@ -206,5 +210,9 @@ salience 100
 			$p.setNomeTratamento("Investigate according to size");
 			}
 		else
+		{
+			System.out.println("Inconclusivo!!");
 			System.out.println("Repetir ultrassom em 4 meses");
+			$p.setNomeTratamento("Inconclusivo, repetir ultrassom em 4 meses");
+		}
 end		
