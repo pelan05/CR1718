@@ -9,38 +9,30 @@ import java.util.*;
 
 public class DroolsTest {
 
-	
-	
-    public static final void main(String[] args) {
-        
-    	Scanner sc = new Scanner(System.in);
-    	Paciente paciente = new Paciente();
-    	InterfaceUI interfaceUi = new InterfaceUI(paciente);
-    	
-    	interfaceUi.start(paciente);
-    	
-    	try {
-            // load up the knowledge base
-	        KieServices ks = KieServices.Factory.get();
-    	    KieContainer kContainer = ks.getKieClasspathContainer();
-        	KieSession kSession = kContainer.newKieSession("ksession-rules");
+	public static final void main(String[] args) {
 
-        	kSession.insert(paciente);
-        	
-        	kSession.fireUntilHalt();
-        	//kSession.fireAllRules();
-        	
+		Scanner sc = new Scanner(System.in);
+		Paciente paciente = new Paciente();
+		InterfaceUI interfaceUi = new InterfaceUI(paciente);
 
-        } catch (Throwable t) {
-            t.printStackTrace();
-        
-        }
-    	
-    
-    
-    
-    
-    }
+		interfaceUi.start(paciente);
 
+		try {
+			// load up the knowledge base
+			KieServices ks = KieServices.Factory.get();
+			KieContainer kContainer = ks.getKieClasspathContainer();
+			KieSession kSession = kContainer.newKieSession("ksession-rules");
+
+			kSession.insert(paciente);
+
+			kSession.fireUntilHalt();
+			// kSession.fireAllRules();
+
+		} catch (Throwable t) {
+			t.printStackTrace();
+
+		}
+
+	}
 
 }

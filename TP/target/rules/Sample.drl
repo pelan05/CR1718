@@ -18,7 +18,7 @@ rule "Paciente tem 1 nodulo menor de 1cm"
 salience 90
 	when
 		$p:Paciente (getSizeHistorico() == 1)
-		$d:Diagnostico(nodulo.size() == 1 && nodulo.get(0) < 1)
+		$d:Diagnostico(getNodulos() == 1 && getNodulo(0).getTam() < 1)
 	then
 		System.out.println("Repetir ultrassom em 4 meses");
 end
