@@ -65,9 +65,9 @@ rule "Stage 0"
 salience 85
 	when
 		$p:Paciente(historico.size() == 1, 
-		historico.get(0).getNodulos() == 1, 
-		historico.get(0).getNodulo().getTam()<2, 
-		getFeelsWell()==true && getLiverWorksNormally()==true)
+		getDiagnostio(0).getNodulos() == 1, 
+		getDiagnostio(0).getNodulo().getTam()<2, 
+		getDiagnostio(0).getFeelsWell()==true && getDiagnostio(0).getLiverWorksNormally()==true)
 	then
 		$p.setStage('0');
 end
@@ -129,11 +129,11 @@ salience 80
 		p:Paciente (getStage()== '0')
 		$d:Diagnostico (nodulo.size()== 1)
 	then
-		if ($d.getPortalPressure() == false){
+		if ($p.getDiagnostico(0).getPortalSpread() == false){
 			System.out.println("RESSECTION");
 			$p.setNomeTratamento("Ressection");
 		}else
-			if (d.getHasAssociatedDiseases() == false){
+			if ($p.getDiagnostico(0).getHasAssociatedDiseases() == false){
 				System.out.println("Liver Transplantation CLT/LDLT");
 				$p.setNomeTratamento("Liver Transplantation CLT/LDLT");
 			}else{
@@ -146,10 +146,10 @@ rule "Very early stage multiple"
 salience 80
 	when
 		$p:Paciente (historico.size() == 1)
-		p:Paciente (stage.getStage()=='0')
-		$d:Diagnostico (nodulo.size()>1)
+			p:Paciente (getStage()=='0')
+				Paciente(getDiagnostico(0).getNodulos()>1)
 	then
-		if (d.getHasAssossiatedDiseases() == false){
+		if ($p.getDiagnostico(0).getHasAssociatedDiseases() == false){
 			System.out.println("Liver Transplantation CLT/LDLT");
 			$p.setNomeTratamento("Liver Transplantation CLT/LDLT");
 		}else{
@@ -162,10 +162,10 @@ rule "Early stage"
 salience 80
 	when
 		$p:Paciente (historico.size() == 1)
-		$p:Paciente (stage.getStage()=='A')
-		$d:Diagnostico (nodulo.size()>1)
+			Paciente (getStage()=='A')
+				Paciente(getDiagnostico(0).getNodulos()>1)
 	then
-		if (d.hasAssossiatedDiseases == false){
+		if ($p.getDiagnostico(0).getHasAssociatedDiseases() == false){
 			System.out.println("Liver Transplantation CLT/LDLT");
 			$p.setNomeTratamento("Liver Transplantation CLT/LDLT");
 		}else{
@@ -178,7 +178,7 @@ rule "Intermediate stage"
 salience 80
 	when
 		$p:Paciente (historico.size() == 1)
-		$p:Paciente (stage.getStage()=='B')
+			Paciente (getStage()=='B')
 	then
 		System.out.println("Transarterial chemoembolization for liver cancer (TACE)");
 		$p.setNomeTratamento("TACE");
@@ -188,7 +188,7 @@ rule "Advanced stage"
 salience 80
 	when
 		$p:Paciente (historico.size() == 1)
-		$p:Paciente (stage.getStage()=='C')
+			Paciente (getStage()=='C')
 	then
 		System.out.println("Sorafenib");
 		$p.setNomeTratamento("Sorafenib");
@@ -198,7 +198,7 @@ rule "Terminal stage"
 salience 80
 	when 
 		$p:Paciente (historico.size() == 1)
-		$p:Paciente (stage.getStage()=='D')
+		   Paciente (getStage()=='D')
 	then
 		System.out.println("Best supportive care");
 		$p.setNomeTratamento("Best supportive care");
