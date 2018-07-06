@@ -106,7 +106,8 @@ rule "Stage C"
 salience 85
 	when
 		$p:Paciente((getDiagnostico(0).getHasSpread() == true || getDiagnostico(0).getFeelsWell() == false) && getDiagnostico(0).getLiverWorksNormally()==true)
-		   Paciente(getLastDiag().getNodulos() < 1) 
+		   Paciente(getLastDiag().getNodulos() < 1)
+		   Paciente(getStage()!='0' && getStage()!='A' && getStage()!='B') 
 	then
 		$p.setStage('C');
 end
@@ -116,6 +117,7 @@ salience 85
 	when
 		$p:Paciente(getDiagnostico(0).getSevereLiverDamage == true || getDiagnostico(0).getNeedsHelp == true)
 		   Paciente(getLastDiag().getNodulos() < 1)
+		   Paciente(getStage()!='0' && getStage()!='A' && getStage()!='B' && getStage()!='C') 
 	then
 		$p.setStage('D');
 end
