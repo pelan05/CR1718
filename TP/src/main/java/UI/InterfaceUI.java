@@ -45,7 +45,7 @@ public class InterfaceUI {
         	choice = sc.next();
         	}while(!choice.equals("ficheiro") && !choice.equals("manual"));
         	
-        	if(choice == "ficheiro"){
+        	if(choice.equals("ficheiro")){
         		file.load(p);
         	}else{
             	pedeTudo(p);
