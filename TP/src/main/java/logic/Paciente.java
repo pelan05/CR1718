@@ -39,6 +39,10 @@ public class Paciente {
 		return historico.get( i );
 	}
 	
+	public int getDiagnosticos() {
+		return historico.size();
+	}
+	
 	public Diagnostico getLastDiag() {
 		return historico.get( historico.size() - 1 );
 	}
