@@ -59,7 +59,7 @@ salience 85
 		$p:Paciente(historico.size() == 1, 
 		historico.get(0).getNodulos() == 1, 
 		historico.get(0).getNodulo().getTam()<2, 
-		getFeelsWell()==true && getLiverWorksNormally()==true);
+		getFeelsWell()==true && getLiverWorksNormally()==true)
 	then
 		$p.setStage('0');
 end
@@ -69,8 +69,8 @@ salience 85
 	when
 		$p:Paciente(historico.size() == 1,
 		historico.get(0).getNodulos() == 1,
-		historico.get(0).getNodulo().getTam()<5 && getStage() != '0',
-		getFeelsWell()==true && getLiverWorksNormally()==true);
+		historico.get(0).getNodulo().getTam()<5 && getStage() != '0')
+		$d:Diagnostico(getFeelsWell()==true && getLiverWorksNormally()==true) from $p.historico.get(0)
 	then
 		$p.setStage('A');
 end
@@ -80,10 +80,38 @@ salience 85
 	when
 		$p:Paciente(historico.size() == 1,
 		historico.get(0).getNodulos() <= 3,
-		getFeelsWell()==true && getLiverWorksNormally()==true);
+		getFeelsWell()==true && getLiverWorksNormally()==true)
 		$n: Nodulo(getTam()<3) from $p.historico.get(0)
 	then
 		$p.setStage('A');
+end
+
+rule "Stage B"
+salience 85
+	when
+		$p:Paciente(historico.size() == 1,
+		getStage()!='0' && getStage()!='A')
+		$d.Diagnostico(getFeelsWell()==true && getLiverWorksNormally()==true) from $p.historico.get(0)
+	then
+		$p.setStage('B');
+end
+
+rule "Stage C"
+salience 85
+	when
+		$p:Paciente(historico.size() == 1)
+		$d:Diagnostico((getHasSpread() == true || getFeelsWell() == false) && getLiverWorksNormally()==true) from from $p.historico.get(0) 
+	then
+		$p.setStage('C');
+end
+
+rule "Stage D"
+salience 85
+	when
+		$p:Paciente(historico.size() == 1)
+		$d:Diagnostico(getSevereLiverDamage == true || getNeedsHelp == true) from $p.historico.get(0)
+	then
+		$p.setStage('D');
 end
 
 rule "Very early stage single"
