@@ -17,7 +17,7 @@ end
 rule "Paciente tem 1 nodulo menor de 1cm"
 salience 90
 	when
-		$p:Paciente (getSizeHistorico() == 1)
+		$p:Paciente ()
 		$d:Diagnostico(getNodulos() == 1 && getNodulo(0).getTam() < 1)
 	then
 		System.out.println("Repetir ultrassom em 4 meses");
@@ -26,16 +26,16 @@ end
 rule "Paciente tem nodulo entre 1 a 2 cm"
 salience 90	
 	when
-		$p:Paciente (getSizeHistorico() == 1)
+		$p:Paciente ()
 		forall($n:Nodulo(getTam()>=1 && getTam()<2))
 	then
 		if ($p.historico.get(0).getFourPhaseCT() >= 1){
 			System.out.println("HCC1");
-			$p.getDiagnostico(0).setResultado(true);
+			$p.getLastDiag().setResultado(true);
 		}else
 			if($p.historico.get(0).getBiopsia() == true){
 				System.out.println("HCC2");
-				$p.getDiagnostico(0).setResultado(true);
+				$p.getLastDiag().setResultado(true);
 			}else{
 				System.out.println("Inconclusivo!");
 				System.out.println("Repetir ultrassom em 4 meses");
@@ -45,16 +45,16 @@ end
 rule "Paciente tem nodulo maior ou igual a 2 cm"
 salience 90	
 	when
-		$p:Paciente (getSizeHistorico() == 1)
-		Paciente(getDiagnostico(0).getNodulo(0).getTam() >= 2 || getDiagnostico(0).getNodulo(1).getTam() >= 2 || getDiagnostico(0).getNodulo(2).getTam() >= 2)
+		$p:Paciente ()
+		Paciente(getLastDiag().getNodulo(0).getTam() >= 2 || getLastDiag().getNodulo(1).getTam() >= 2 || getLastDiag().getNodulo(2).getTam() >= 2)
 	then
 		if ($p.historico.get(0).getFourPhaseCT() >= 1){
 			System.out.println("HCC3");
-			$p.getDiagnostico(0).setResultado(true);
+			$p.getLastDiag().setResultado(true);
 		}else
 			if($p.historico.get(0).getBiopsia() == true){
 				System.out.println("HCC4");
-				$p.getDiagnostico(0).setResultado(true);
+				$p.getLastDiag().setResultado(true);
 			}else{
 				System.out.println("Inconclusivo!");
 				System.out.println("Repetir ultrassom em 4 meses");
@@ -64,10 +64,9 @@ end
 rule "Stage 0"
 salience 85
 	when
-		$p:Paciente(getSizeHistorico() == 1, 
-		getDiagnostico(0).getNodulos() == 1, 
-		getDiagnostico(0).getNodulo(0).getTam()<2, 
-		getDiagnostico(0).getFeelsWell()==true && getDiagnostico(0).getLiverWorksNormally()==true)
+		$p:Paciente(getLastDiag().getNodulos() == 1, 
+		getLastDiag().getNodulo(0).getTam()<2, 
+		getLastDiag().getFeelsWell()==true && getLastDiag().getLiverWorksNormally()==true)
 	then
 		$p.setStage('0');
 end
@@ -75,10 +74,9 @@ end
 rule "Stage A single tumor"
 salience 85
 	when
-		$p:Paciente(getSizeHistorico() == 1,
-		getDiagnostico(0).getNodulos() == 1,
-		getDiagnostico(0).getNodulo(0).getTam() < 5 && getStage() != '0')
-			Paciente(getDiagnostico(0).getFeelsWell()==true && getDiagnostico(0).getLiverWorksNormally()==true)
+		$p:Paciente(getLastDiag().getNodulos() == 1,
+		getLastDiag().getNodulo(0).getTam() < 5 && getStage() != '0')
+		Paciente(getLastDiag().getFeelsWell() == true && getLastDiag().getLiverWorksNormally()==true)
 	then
 		$p.setStage('A');
 end
@@ -86,8 +84,8 @@ end
 rule "Stage A multiple tumor"
 salience 85
 	when
-		$p:Paciente(getSizeHistorico() == 1, getDiagnostico(0).getNodulos() <= 3, getDiagnostico(0).getFeelsWell()==true && getDiagnostico(0).getLiverWorksNormally()==true)
-			Paciente(getDiagnostico(0).getNodulo(0).getTam()<3, getDiagnostico(0).getNodulo(1).getTam()<3, getDiagnostico(0).getNodulo(2).getTam()<3)
+		$p:Paciente(getLastDiag().getNodulos() <= 3, getLastDiag().getFeelsWell()==true && getLastDiag().getLiverWorksNormally()==true)
+			Paciente(getLastDiag().getNodulo(0).getTam()<3, getLastDiag().getNodulo(1).getTam()<3, getLastDiag().getNodulo(2).getTam()<3)
 	then
 		$p.setStage('A');
 end
@@ -95,7 +93,7 @@ end
 rule "Stage B"
 salience 85
 	when
-		$p:Paciente(historico.size() == 1, getStage()!='0' && getStage()!='A')
+		$p:Paciente(getStage()!='0' && getStage()!='A')
 			Paciente(getDiagnostico(0).getFeelsWell()==true && getDiagnostico(0).getLiverWorksNormally()==true)
 	then
 		$p.setStage('B');
@@ -104,8 +102,7 @@ end
 rule "Stage C"
 salience 85
 	when
-		$p:Paciente(historico.size() == 1)
-			Paciente((getDiagnostico(0).getHasSpread() == true || getDiagnostico(0).getFeelsWell() == false) && getDiagnostico(0).getLiverWorksNormally()==true) 
+		$p:Paciente((getDiagnostico(0).getHasSpread() == true || getDiagnostico(0).getFeelsWell() == false) && getDiagnostico(0).getLiverWorksNormally()==true) 
 	then
 		$p.setStage('C');
 end
@@ -113,18 +110,18 @@ end
 rule "Stage D"
 salience 85
 	when
-		$p:Paciente(historico.size() == 1)
-			Paciente(getDiagnostico(0).getSevereLiverDamage == true || getDiagnostico(0).getNeedsHelp == true)
+		$p:Paciente(getDiagnostico(0).getSevereLiverDamage == true || getDiagnostico(0).getNeedsHelp == true)
 	then
 		$p.setStage('D');
 end
 
+//REGRAS COMUNS
+
 rule "Very early stage single"
 salience 80
 	when
-		$p:Paciente (historico.size()== 1)
-			Paciente (getStage()== '0')
-			Paciente(getDiagnostico(0).getNodulos()== 1)
+		$p:Paciente (getStage()== '0')
+		   Paciente(getDiagnostico(0).getNodulos()== 1)
 	then
 		if ($p.getDiagnostico(0).getPortalSpread() == false){
 			System.out.println("RESSECTION");
@@ -142,9 +139,8 @@ end
 rule "Very early stage multiple"
 salience 80
 	when
-		$p:Paciente (historico.size() == 1)
-			Paciente (getStage()=='0')
-			Paciente(getDiagnostico(0).getNodulos()>1)
+		$p:Paciente (getStage()=='0')
+		   Paciente(getDiagnostico(0).getNodulos()>1)
 	then
 		if ($p.getDiagnostico(0).getHasAssociatedDiseases() == false){
 			System.out.println("Liver Transplantation CLT/LDLT2");
@@ -158,9 +154,8 @@ end
 rule "Early stage"
 salience 80
 	when
-		$p:Paciente (historico.size() == 1)
-			Paciente (getStage()=='A')
-			Paciente(getDiagnostico(0).getNodulos()>1)
+		$p:Paciente (getStage()=='A')
+		   Paciente(getDiagnostico(0).getNodulos()>1)
 	then
 		if ($p.getDiagnostico(0).getHasAssociatedDiseases() == false){
 			System.out.println("Liver Transplantation CLT/LDLT3");
@@ -174,8 +169,7 @@ end
 rule "Intermediate stage"
 salience 80
 	when
-		$p:Paciente (historico.size() == 1)
-			Paciente (getStage()=='B')
+		$p:Paciente (getStage()=='B')
 	then
 		System.out.println("Transarterial chemoembolization for liver cancer (TACE)");
 		$p.setNomeTratamento("TACE");
@@ -184,8 +178,7 @@ end
 rule "Advanced stage"
 salience 80
 	when
-		$p:Paciente (historico.size() == 1)
-			Paciente (getStage()=='C')
+		$p:Paciente (getStage()=='C')
 	then
 		System.out.println("Sorafenib");
 		$p.setNomeTratamento("Sorafenib");
@@ -194,11 +187,23 @@ end
 rule "Terminal stage"
 salience 80
 	when 
-		$p:Paciente (historico.size() == 1)
-		   Paciente (getStage()=='D')
+		$p:Paciente (getStage()=='D')
 	then
 		System.out.println("Best supportive care");
 		$p.setNomeTratamento("Best supportive care");
 end
 
 // REGRAS QUANDO EXISTIREM DIAGNOSTICOS ANTERIORES
+
+rule "Returning patient"
+salience 100
+	when
+		$p:Paciente(getDiagnosticos() > 1)
+	then
+		if ($p.getLastDiag().getNodulo(0).getGrowing() == true){
+			System.out.println("Investigate according to size");
+			$p.setNomeTratamento("Investigate according to size");
+			}
+		else
+			System.out.println("Repetir ultrassom em 4 meses");
+end		
