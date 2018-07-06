@@ -20,7 +20,7 @@ salience 90
 		$p:Paciente (historico.size() == 1)
 		$d:Diagnostico(nodulo.size() == 1 && nodulo.get(0) < 1)
 	then
-		System.out.println("Repetir ultra-som em 4 meses");
+		System.out.println("Repetir ultrassom em 4 meses");
 end
 
 rule "Paciente tem nodulo entre 1 a 2 cm"
@@ -29,13 +29,17 @@ salience 90
 		$p:Paciente (historico.size() == 1)
 		forall($n:Nodulo(getTam()>=1 && getTam()<2))
 	then
-		if ($p.historico.get(0).getFourPhaseCT() >= 1)
-			System.out.println("BIG CANCER");
-		else
-			if($p.historico.get(0).getBiopsia() == true)
-				System.out.println("BIG CANCER");
-			else
-				System.out.println("Inconclusive, repeat in 4 months");
+		if ($p.historico.get(0).getFourPhaseCT() >= 1){
+			System.out.println("HCC");
+			$p.getDiagnostico(0).setResultado(true);
+		}else
+			if($p.historico.get(0).getBiopsia() == true){
+				System.out.println("HCC");
+				$p.getDiagnostico(0).setResultado(true);
+			}else{
+				System.out.println("Inconclusivo!");
+				System.out.println("Repetir ultrassom em 4 meses");
+		}
 end
 
 rule "Paciente tem nodulo maior ou igual a 2 cm"
@@ -44,13 +48,17 @@ salience 90
 		$p:Paciente (historico.size() == 1)
 		forall($n:Nodulo(getTam()>= 2))
 	then
-		if	($p.historico.get(0).getFourPhaseCT()>= 1)
-			System.out.println("BIG CANCER");
-		else
-			if($p.historico.get(0).getBiopsia() == true)
-				System.out.println("BIG CANCER");
-			else
-				System.out.println("Inconclusive, repeat in 4 months");
+		if ($p.historico.get(0).getFourPhaseCT() >= 1){
+			System.out.println("HCC");
+			$p.getDiagnostico(0).setResultado(true);
+		}else
+			if($p.historico.get(0).getBiopsia() == true){
+				System.out.println("HCC");
+				$p.getDiagnostico(0).setResultado(true);
+			}else{
+				System.out.println("Inconclusivo!");
+				System.out.println("Repetir ultrassom em 4 meses");
+		}
 end
 
 rule "Stage 0"
