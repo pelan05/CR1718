@@ -33,6 +33,9 @@ public class DroolsTest {
 
 		}
 
+		
+		
+		sc.close();
 	}
 
 }
