@@ -30,11 +30,11 @@ salience 90
 		forall($n:Nodulo(getTam()>=1 && getTam()<2))
 	then
 		if ($p.historico.get(0).getFourPhaseCT() >= 1){
-			System.out.println("HCC");
+			System.out.println("HCC1");
 			$p.getDiagnostico(0).setResultado(true);
 		}else
 			if($p.historico.get(0).getBiopsia() == true){
-				System.out.println("HCC");
+				System.out.println("HCC2");
 				$p.getDiagnostico(0).setResultado(true);
 			}else{
 				System.out.println("Inconclusivo!");
@@ -46,14 +46,14 @@ rule "Paciente tem nodulo maior ou igual a 2 cm"
 salience 90	
 	when
 		$p:Paciente (getSizeHistorico() == 1)
-		forall($n:Nodulo(getTam()>= 2))
+		Paciente(getDiagnostico(0).getNodulo(0).getTam() >= 2 || getDiagnostico(0).getNodulo(1).getTam() >= 2 || getDiagnostico(0).getNodulo(2).getTam() >= 2)
 	then
 		if ($p.historico.get(0).getFourPhaseCT() >= 1){
-			System.out.println("HCC");
+			System.out.println("HCC3");
 			$p.getDiagnostico(0).setResultado(true);
 		}else
 			if($p.historico.get(0).getBiopsia() == true){
-				System.out.println("HCC");
+				System.out.println("HCC4");
 				$p.getDiagnostico(0).setResultado(true);
 			}else{
 				System.out.println("Inconclusivo!");
@@ -131,7 +131,7 @@ salience 80
 			$p.setNomeTratamento("Ressection");
 		}else
 			if ($p.getDiagnostico(0).getHasAssociatedDiseases() == false){
-				System.out.println("Liver Transplantation CLT/LDLT");
+				System.out.println("Liver Transplantation CLT/LDLT1");
 				$p.setNomeTratamento("Liver Transplantation CLT/LDLT");
 			}else{
 				System.out.println("Radiofrequency ablation RF/PEI");
@@ -147,7 +147,7 @@ salience 80
 			Paciente(getDiagnostico(0).getNodulos()>1)
 	then
 		if ($p.getDiagnostico(0).getHasAssociatedDiseases() == false){
-			System.out.println("Liver Transplantation CLT/LDLT");
+			System.out.println("Liver Transplantation CLT/LDLT2");
 			$p.setNomeTratamento("Liver Transplantation CLT/LDLT");
 		}else{
 			System.out.println("Radiofrequency ablation RF/PEI");
@@ -163,7 +163,7 @@ salience 80
 			Paciente(getDiagnostico(0).getNodulos()>1)
 	then
 		if ($p.getDiagnostico(0).getHasAssociatedDiseases() == false){
-			System.out.println("Liver Transplantation CLT/LDLT");
+			System.out.println("Liver Transplantation CLT/LDLT3");
 			$p.setNomeTratamento("Liver Transplantation CLT/LDLT");
 		}else{
 			System.out.println("Radiofrequency ablation RF/PEI");
