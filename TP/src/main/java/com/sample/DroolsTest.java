@@ -25,6 +25,11 @@ public class DroolsTest {
     	    KieContainer kContainer = ks.getKieClasspathContainer();
         	KieSession kSession = kContainer.newKieSession("ksession-rules");
 
+        	kSession.insert(paciente);
+        	
+        	kSession.fireUntilHalt();
+        	//kSession.fireAllRules();
+        	
 
         } catch (Throwable t) {
             t.printStackTrace();

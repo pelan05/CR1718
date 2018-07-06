@@ -129,12 +129,14 @@ salience 80
 		p:Paciente (getStage()== '0')
 		$d:Diagnostico (nodulo.size()== 1)
 	then
-		if ($d.getPortalPressure() == false)
+		if ($d.getPortalPressure() == false){
 			System.out.println("RESSECTION");
-		else
-			if (d.getHasAssociatedDiseases() == false)
-				System.out.println("TRANSPLANT");
-			else
+			$p.setNomeTratamento("Ressection");
+		}else
+			if (d.getHasAssociatedDiseases() == false){
+				System.out.println("Liver Transplantation CLT/LDLT");
+				$p.setNomeTratamento("Liver Transplantation CLT/LDLT");
+			}else
 				System.out.println("Radiofrequency ablation");
 end
 
