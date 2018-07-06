@@ -136,8 +136,10 @@ salience 80
 			if (d.getHasAssociatedDiseases() == false){
 				System.out.println("Liver Transplantation CLT/LDLT");
 				$p.setNomeTratamento("Liver Transplantation CLT/LDLT");
-			}else
-				System.out.println("Radiofrequency ablation");
+			}else{
+				System.out.println("Radiofrequency ablation RF/PEI");
+				$p.setNomeTratamento("RF/PEI");
+			}
 end
 
 rule "Very early stage multiple"
@@ -147,10 +149,13 @@ salience 80
 		p:Paciente (stage.getStage()=='0')
 		$d:Diagnostico (nodulo.size()>1)
 	then
-		if (d.getHasAssossiatedDiseases() == false)
-			System.out.println("TRANSPLANT");
-		else
-			System.out.println("Radiofrequency ablation");
+		if (d.getHasAssossiatedDiseases() == false){
+			System.out.println("Liver Transplantation CLT/LDLT");
+			$p.setNomeTratamento("Liver Transplantation CLT/LDLT");
+		}else{
+			System.out.println("Radiofrequency ablation RF/PEI");
+			$p.setNomeTratamento("RF/PEI");
+		}
 end
 
 rule "Early stage"
@@ -160,10 +165,13 @@ salience 80
 		$p:Paciente (stage.getStage()=='A')
 		$d:Diagnostico (nodulo.size()>1)
 	then
-		if (d.hasAssossiatedDiseases == false)
-			System.out.println("TRANSPLANT");
-		else
-			System.out.println("Radiofrequency ablation");
+		if (d.hasAssossiatedDiseases == false){
+			System.out.println("Liver Transplantation CLT/LDLT");
+			$p.setNomeTratamento("Liver Transplantation CLT/LDLT");
+		}else{
+			System.out.println("Radiofrequency ablation RF/PEI");
+			$p.setNomeTratamento("RF/PEI");
+		}
 end
 
 rule "Intermediate stage"
@@ -172,7 +180,8 @@ salience 80
 		$p:Paciente (historico.size() == 1)
 		$p:Paciente (stage.getStage()=='B')
 	then
-		System.out.println("Transarterial chemoembolization for liver cancer.");
+		System.out.println("Transarterial chemoembolization for liver cancer (TACE)");
+		$p.setNomeTratamento("TACE");
 end
 
 rule "Advanced stage"
@@ -182,6 +191,7 @@ salience 80
 		$p:Paciente (stage.getStage()=='C')
 	then
 		System.out.println("Sorafenib");
+		$p.setNomeTratamento("Sorafenib");
 end
 
 rule "Terminal stage"
@@ -191,6 +201,7 @@ salience 80
 		$p:Paciente (stage.getStage()=='D')
 	then
 		System.out.println("Best supportive care");
+		$p.setNomeTratamento("Best supportive care");
 end
 
 // REGRAS QUANDO EXISTIREM DIAGNOSTICOS ANTERIORES
