@@ -39,6 +39,7 @@ salience 90
 			}else{
 				System.out.println("Inconclusivo!");
 				System.out.println("Repetir ultrassom em 4 meses");
+				$p.setNomeTratamento("Repetir ultrassom e 4 meses");
 		}
 end
 
