@@ -35,7 +35,7 @@ salience 90
 			if($p.historico.get(0).getBiopsia() == true)
 				System.out.println("BIG CANCER");
 			else
-				System.out.println("NO CANCER");
+				System.out.println("Inconclusive, repeat in 4 months");
 end
 
 rule "Paciente tem nodulo maior ou igual a 2 cm"
@@ -50,7 +50,7 @@ salience 90
 			if($p.historico.get(0).getBiopsia() == true)
 				System.out.println("BIG CANCER");
 			else
-				System.out.println("NO CANCER");
+				System.out.println("Inconclusive, repeat in 4 months");
 end
 
 rule "Stage 0"
