@@ -4,6 +4,8 @@ import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import logic.*;
+import UI.EscolheLoad;
+import UI.*;
 import UI.InterfaceUI;
 import java.util.*;
 
@@ -14,9 +16,12 @@ public class DroolsTest {
 		Scanner sc = new Scanner(System.in);
 		Paciente paciente = new Paciente();
 		InterfaceUI interfaceUi = new InterfaceUI(paciente);
-
-		interfaceUi.start(paciente);
-
+		
+		//interfaceUi.start(paciente);
+		EscolheLoad loadScreen = new EscolheLoad();  
+	    loadScreen.showEventDemo();   
+		
+		
 		try {
 			// load up the knowledge base
 			KieServices ks = KieServices.Factory.get();
