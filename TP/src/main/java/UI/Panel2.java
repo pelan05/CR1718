@@ -28,7 +28,7 @@ public class Panel2 extends JPanel {
 		
 		this.fc = new JFileChooser("C:\\Users\\pelan\\Documents\\GitHub\\CR1718\\TP\\ficheiros");
 		JPanel  panel2 = new JPanel();
-		JButton button = new JButton("OK");
+		JButton button = new JButton("Proxima Pagina");
 		
 		button.addActionListener(new ActionListener() {
 
@@ -62,9 +62,6 @@ public class Panel2 extends JPanel {
 
 
 	public void botao1() {
-		System.out.println("DEBUG: in botao1() in Panel2.java");
-		
-		
 		
 		Main.changeState(ViewState.FINAL_STATE);
 	
@@ -72,9 +69,6 @@ public class Panel2 extends JPanel {
 	
 	
 	public void ficheiro() {
-
-		System.out.println("DEBUG: in ficheiro() in Panel2.java path: "+ fc.getSelectedFile().getPath());
-		
 		
 		file = new LoadFile(fc.getSelectedFile().getPath());
 		file.load(p);
