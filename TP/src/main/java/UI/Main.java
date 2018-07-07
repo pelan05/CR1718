@@ -20,7 +20,7 @@ public class Main {
 	public Main() {
 
 		frame = new JFrame();
-		mpanel = new JPanel( new GridLayout(2,1,5,5) );
+		mpanel = new JPanel();
 		panel1 = new Panel1();
 		panel2 = new Panel2();
 		panel3 = new Panel3();

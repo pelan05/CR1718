@@ -61,7 +61,8 @@ salience 88
 		getLastDiag().checkSizeNoduloMenor(2) == true, 
 		getLastDiag().getFeelsWell() , getLastDiag().getLiverWorksNormally(),
 		getLastDiag().getNeedsHelp() == false,
-		getLastDiag().getSevereLiverDamage() == false)
+		getLastDiag().getSevereLiverDamage() == false,
+		getStage() != 0)
 	then
 		modify($p){
 		setStage(0),
@@ -74,7 +75,7 @@ rule "Stage A single tumor"
 salience 87
 	when
 		$p:Paciente(getLastDiag().getNodulos() == 1,
-		getLastDiag().checkSizeNoduloMenor(5) , getStage() != 0,
+		getLastDiag().checkSizeNoduloMenor(5) , getStage() != 0, getStage() != 1,
 		getLastDiag().getFeelsWell() == true , getLastDiag().getLiverWorksNormally() == true,
 		getLastDiag().getNeedsHelp() == false,
 		getLastDiag().getSevereLiverDamage() == false)
@@ -91,6 +92,7 @@ salience 87
 		$p:Paciente(getLastDiag().getNodulos() <= 3,
 		getLastDiag().getFeelsWell() == true , getLastDiag().getLiverWorksNormally() == true,
 	    getLastDiag().checkSizeNoduloMenor(3) == true,
+	    getStage() != 0, getStage() != 1,
 	    getLastDiag().getNeedsHelp() == false,
 		getLastDiag().getSevereLiverDamage() == false)
 	then
@@ -103,7 +105,7 @@ end
 rule "Stage B"
 salience 86
 	when
-		$p:Paciente(getStage()!=0, getStage()!=1,
+		$p:Paciente(getStage()!=0, getStage()!=1, getStage() != 2,
 		   getLastDiag().getFeelsWell() == true, getLastDiag().getLiverWorksNormally() == true,
 		   getLastDiag().getNodulos() > 3,
 		   getLastDiag().getNeedsHelp() == false,
@@ -119,7 +121,7 @@ rule "Stage C"
 salience 85
 	when
 		$p:Paciente(getLastDiag().getHasSpread() == true, getLastDiag().getLiverWorksNormally() == true,
-		   getStage()!=0 , getStage()!=1, getStage()!=2,
+		   getStage()!=0 , getStage()!=1, getStage()!=2, getStage() != 3,
 		   getLastDiag().getNeedsHelp() == false,
 		   getLastDiag().getSevereLiverDamage() == false) 
 	then
@@ -134,7 +136,7 @@ rule "Stage C FWF"
 salience 85
 	when
 		$p:Paciente(getLastDiag().getFeelsWell() == false, getLastDiag().getLiverWorksNormally() == true,
-		   getStage()!=0 , getStage()!=1, getStage()!=2,
+		   getStage()!=0 , getStage()!=1, getStage()!=2, getStage() != 3,
 		   getLastDiag().getNeedsHelp() == false,
 		   getLastDiag().getSevereLiverDamage() == false) 
 	then

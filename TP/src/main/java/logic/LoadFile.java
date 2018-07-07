@@ -18,6 +18,9 @@ public class LoadFile {
 		this.tam = 0;
 		this.tempor = 0;
 		
+		
+		System.out.println("In LoadFile    path: "+ this.path);
+		
 	}
 	
 	
