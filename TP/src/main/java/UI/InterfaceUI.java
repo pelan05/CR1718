@@ -56,7 +56,7 @@ public class InterfaceUI {
         		texto.append(defaultPath).append(string).append(txt);
         		path = texto.toString();
         		
-        		this.file = new LoadFile(p, path);
+        		this.file = new LoadFile(path);
         		
         		file.load(p);
         	}else{

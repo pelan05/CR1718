@@ -8,7 +8,7 @@ import java.util.Scanner;
 rule "Paciente tem 1 nodulo menor de 1cm"
 salience 90
 	when
-		$p:Paciente (getLastDiag().checkSizeNoduloMenor(1))
+		$p:Paciente (getLastDiag().checkSizeNoduloMenor(1) == true)
 	then
 		System.out.println("Repetir ultrassom em 4 meses");
 		$p.setNomeTratamento("Inconclusivo, repetir ultrassom em 4 meses");
@@ -18,7 +18,7 @@ end
 rule "Paciente tem nodulo entre 1 a 2 cm"
 salience 90	
 	when
-		$p:Paciente (getLastDiag().checkSizeNoduloEntre(1, 2))
+		$p:Paciente (getLastDiag().checkSizeNoduloEntre(1, 2) == true)
 	then
 		if ($p.historico.get(0).getFourPhaseCT() >= 2){
 			System.out.println("HCC");
@@ -37,7 +37,7 @@ end
 
 rule "Paciente tem nodulo maior ou igual a 2 cm"
 salience 90	
-	when//erro aqui quando nodulos != 3
+	when
 		$p:Paciente (getLastDiag().checkSizeNoduloMaior(2) == true)
 	then
 		if ($p.getLastDiag().getFourPhaseCT() >= 1){
@@ -58,10 +58,10 @@ rule "Stage 0"
 salience 88
 	when
 		$p:Paciente(getLastDiag().getNodulos() == 1, 
-		getLastDiag().checkSizeNoduloMenor(2), 
+		getLastDiag().checkSizeNoduloMenor(2) == true, 
 		getLastDiag().getFeelsWell() && getLastDiag().getLiverWorksNormally(),
-		!getLastDiag().getNeedsHelp(),
-		!getLastDiag().getSevereLiverDamage())
+		getLastDiag().getNeedsHelp() == false,
+		getLastDiag().getSevereLiverDamage() == false)
 	then
 		$p.setStage('0');
 		$p.getLastDiag().setNeedsHelp(false);
@@ -74,9 +74,9 @@ salience 87
 	when
 		$p:Paciente(getLastDiag().getNodulos() == 1,
 		getLastDiag().checkSizeNoduloMenor(5) && getStage() != '0',
-		getLastDiag().getFeelsWell() && getLastDiag().getLiverWorksNormally(),
-		!getLastDiag().getNeedsHelp(),
-		!getLastDiag().getSevereLiverDamage())
+		getLastDiag().getFeelsWell() == true && getLastDiag().getLiverWorksNormally() == true,
+		getLastDiag().getNeedsHelp() == false,
+		getLastDiag().getSevereLiverDamage() == false)
 	then
 		$p.setStage('A');
 end
@@ -85,10 +85,10 @@ rule "Stage A multiple tumor"
 salience 87
 	when
 		$p:Paciente(getLastDiag().getNodulos() <= 3,
-		getLastDiag().getFeelsWell() && getLastDiag().getLiverWorksNormally(),
-	    getLastDiag().checkSizeNoduloMenor(3),
-	    !getLastDiag().getNeedsHelp(),
-		!getLastDiag().getSevereLiverDamage())
+		getLastDiag().getFeelsWell() == true && getLastDiag().getLiverWorksNormally() == true,
+	    getLastDiag().checkSizeNoduloMenor(3) == true,
+	    getLastDiag().getNeedsHelp() == false,
+		getLastDiag().getSevereLiverDamage() == false)
 	then
 		$p.setStage('A');
 end
@@ -97,10 +97,10 @@ rule "Stage B"
 salience 86
 	when
 		$p:Paciente(getStage()!='0' && getStage()!='A',
-		   getLastDiag().getFeelsWell() && getLastDiag().getLiverWorksNormally(),
+		   getLastDiag().getFeelsWell() == true && getLastDiag().getLiverWorksNormally() == true,
 		   getLastDiag().getNodulos() > 3,
-		   !getLastDiag().getNeedsHelp(),
-		   !getLastDiag().getSevereLiverDamage())
+		   getLastDiag().getNeedsHelp() == false,
+		   getLastDiag().getSevereLiverDamage() == false)
 	then
 		$p.setStage('B');
 end
@@ -108,10 +108,10 @@ end
 rule "Stage C"
 salience 85
 	when
-		$p:Paciente((getLastDiag().getHasSpread() || !getLastDiag().getFeelsWell()) && getLastDiag().getLiverWorksNormally(),
+		$p:Paciente((getLastDiag().getHasSpread() == true || getLastDiag().getFeelsWell() == false) && getLastDiag().getLiverWorksNormally() == true,
 		   getStage()!='0' && getStage()!='A' && getStage()!='B',
-		   !getLastDiag().getNeedsHelp(),
-		   !getLastDiag().getSevereLiverDamage()) 
+		   getLastDiag().getNeedsHelp() == false,
+		   getLastDiag().getSevereLiverDamage() == false) 
 	then
 		$p.setStage('C');
 end
@@ -119,10 +119,8 @@ end
 rule "Stage D"
 salience 84
 	when
-		$p:Paciente(getLastDiag().getSevereLiverDamage || getLastDiag().getNeedsHelp,
-		   getStage()!='0' && getStage()!='A' && getStage()!='B' && getStage()!='C',
-		   !getLastDiag().getNeedsHelp(),
-		   !getLastDiag().getSevereLiverDamage()) 
+		$p:Paciente(getLastDiag().getSevereLiverDamage == true || getLastDiag().getNeedsHelp == true,
+		   getStage()!='0' && getStage()!='A' && getStage()!='B' && getStage()!='C') 
 	then
 		$p.setStage('D');
 end

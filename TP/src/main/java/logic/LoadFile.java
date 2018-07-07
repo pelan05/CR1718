@@ -11,7 +11,7 @@ public class LoadFile {
 	float tempor;
 	
 	
-	public LoadFile(Paciente d, String pat) {
+	public LoadFile(String pat) {
 		
 		this.path = pat;
 		this.temp = null;
