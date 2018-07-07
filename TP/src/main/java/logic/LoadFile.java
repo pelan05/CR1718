@@ -5,7 +5,6 @@ import java.io.*;
 public class LoadFile {
 	String path;
 	Diagnostico diagnostico;
-	Nodulo nodulo;
 	String temp;
 	int tam;
 	float tempor;
@@ -16,7 +15,6 @@ public class LoadFile {
 		this.path = pat;
 		this.temp = null;
 		this.diagnostico = new Diagnostico();
-		this.nodulo = new Nodulo();
 		this.tam = 0;
 		this.tempor = 0;
 		
@@ -41,12 +39,13 @@ public class LoadFile {
 	            	
 	            	
 	            	temp = br.readLine();
-	            	this.nodulo.setTam(Float.valueOf(temp));						//tam
+	            	temp = temp.replace(',', '.');
+	            	tempor = Float.valueOf(temp);
+	            	//tam
 	            	
-	            	temp = br.readLine();
-		            this.nodulo.setGrowing(Boolean.parseBoolean(temp));				//isGrowing
+	            	temp = br.readLine();			//isGrowing
 		            
-		            diagnostico.addNodulo(nodulo);
+		            diagnostico.addNodulo(new Nodulo(tempor,Boolean.parseBoolean(temp)));
 	            }
 	            
 	            temp = br.readLine();

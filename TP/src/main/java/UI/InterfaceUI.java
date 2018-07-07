@@ -9,7 +9,6 @@ public class InterfaceUI {
 	Scanner sc;
 
 	Diagnostico diagnostico;
-	Nodulo nodulo;
 	String temp;
 	int tam;
 	String choice;
@@ -28,7 +27,6 @@ public class InterfaceUI {
 		this.sc = new Scanner(System.in);
 		this.temp = null;
 		this.diagnostico = new Diagnostico();
-		this.nodulo = new Nodulo();
 		this.tam = 0;
 		this.choice = "";
 		this.tempor = 0;
@@ -92,15 +90,13 @@ public class InterfaceUI {
         	temp = sc.nextLine();
         	temp = temp.replace(',', '.');
         	tempor = Float.valueOf(temp);
-        	this.nodulo.setTam(tempor);
         	
         	do {
         	System.out.println("O nodulo cresceu desde a ultima vez? (true/false)");
             temp = sc.next();
-        	}while(!temp.equals("true") && !temp.equals("false"));
-        	this.nodulo.setGrowing(Boolean.parseBoolean(temp));				//isGrowing
+        	}while(!temp.equals("true") && !temp.equals("false"));		//isGrowing
             
-        	diagnostico.addNodulo(nodulo);
+        	diagnostico.addNodulo(new Nodulo(tempor,Boolean.parseBoolean(temp)));
         }
 		
 		do{

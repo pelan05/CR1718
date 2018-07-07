@@ -5,12 +5,12 @@ public class Nodulo {
 	public float tamanho;			//em cm
 	public boolean isGrowing;		//positivo ou negativo
 	
-	public Nodulo() {
+	public Nodulo(float tam, boolean is) {
 		
 		//pedir ambos through GUI
 		//temp
-		tamanho = 1;
-		isGrowing = false;
+		tamanho = tam;
+		isGrowing = is;
 		
 	}
 	
