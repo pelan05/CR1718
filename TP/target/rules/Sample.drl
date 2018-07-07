@@ -79,7 +79,10 @@ salience 87
 		getLastDiag().getNeedsHelp() == false,
 		getLastDiag().getSevereLiverDamage() == false)
 	then
-		$p.setStage(1);
+	
+	modify($p){
+		setStage(1)
+	};
 end
 
 rule "Stage A multiple tumor"
@@ -91,7 +94,10 @@ salience 87
 	    getLastDiag().getNeedsHelp() == false,
 		getLastDiag().getSevereLiverDamage() == false)
 	then
-		$p.setStage(1);
+	
+	modify($p){
+		setStage(1)
+	};
 end
 
 rule "Stage B"
@@ -103,7 +109,10 @@ salience 86
 		   getLastDiag().getNeedsHelp() == false,
 		   getLastDiag().getSevereLiverDamage() == false)
 	then
-		$p.setStage(2);
+
+	modify($p){
+		setStage(2)
+	};
 end
 
 rule "Stage C"
@@ -114,7 +123,11 @@ salience 85
 		   getLastDiag().getNeedsHelp() == false,
 		   getLastDiag().getSevereLiverDamage() == false) 
 	then
-		$p.setStage(3);
+	
+	modify($p){
+		setStage(3)
+	};
+	
 end
 
 rule "Stage C FWF"
@@ -125,7 +138,11 @@ salience 85
 		   getLastDiag().getNeedsHelp() == false,
 		   getLastDiag().getSevereLiverDamage() == false) 
 	then
-		$p.setStage(3);
+	
+	modify($p){
+		setStage(3)
+	};
+	
 end
 rule "Stage D SLD"
 salience 84
@@ -156,18 +173,18 @@ end
 
 //REGRAS COMUNS
 
-rule "Print stage"
-salience 80
-	when
-		$p:Paciente()
-	then
-		System.out.println("confirmando que isto é 0 _ " + $p.getStage());
-end
+//rule "Print stage"
+//salience 80
+	//when
+	//	$p:Paciente()
+	//then
+	//	System.out.println("confirmando que isto é 0 _ " + $p.getStage());
+//end
 
 rule "Very early stage single"
 salience 80
 	when
-		$p:Paciente (getStage()== 0,
+		$p:Paciente (compareStage(0),
 		   getLastDiag().getNodulos()== 1)
 	then
 		if ($p.getLastDiag().getPortalSpread() == false){
@@ -189,7 +206,7 @@ end
 rule "Very early stage multiple"
 salience 77
 	when
-		$p:Paciente (getStage()==0)
+		$p:Paciente (compareStage(0))
 		   Paciente(getLastDiag().getNodulos()>1)
 	then
 		if ($p.getLastDiag().getHasAssociatedDiseases() == false){
@@ -206,7 +223,7 @@ end
 rule "Early stage"
 salience 75
 	when
-		$p:Paciente (getStage() == 1)
+		$p:Paciente (compareStage(1))
 		   Paciente(getLastDiag().getNodulos()>1)
 	then
 		if ($p.getLastDiag().getHasAssociatedDiseases() == false){
@@ -223,7 +240,7 @@ end
 rule "Intermediate stage"
 salience 72
 	when
-		$p:Paciente (getStage() == 2)
+		$p:Paciente (compareStage(2))
 	then
 		System.out.println("Transarterial chemoembolization for liver cancer (TACE)");
 		$p.setNomeTratamento("TACE");
@@ -233,7 +250,7 @@ end
 rule "Advanced stage"
 salience 71
 	when
-		$p:Paciente (getStage() == 3)
+		$p:Paciente (compareStage(3))
 	then
 		System.out.println("Sorafenib");
 		$p.setNomeTratamento("Sorafenib");
