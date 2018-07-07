@@ -15,14 +15,14 @@ public class DroolsTest {
 
 		Paciente paciente = new Paciente();
 		
-		//InterfaceUI interfaceUi = new InterfaceUI(paciente);
-		//interfaceUi.start(paciente);
+		InterfaceUI interfaceUi = new InterfaceUI(paciente);
+		interfaceUi.start(paciente);
 
 
-		Main n = new Main(paciente);
+		//Main n = new Main(paciente);
 
 
-/*
+
 		try {
 			// load up the knowledge base
 			KieServices ks = KieServices.Factory.get();
@@ -38,7 +38,7 @@ public class DroolsTest {
 			t.printStackTrace();
 
 		}
-*/
+
 	}
 
 }
