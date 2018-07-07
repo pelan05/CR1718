@@ -21,10 +21,11 @@ public class Panel2 extends JPanel {
 		JLabel label1 = new JLabel("Escolher ficheiro:");
 		
 		JFileChooser fc = new JFileChooser();
-		fc.showDialog(this, "Abrir");
 		
+
 		JPanel  panel2 = new JPanel();
 		JButton button = new JButton("AtPanel2");
+		JButton buttonFile = new JButton("Escolher Ficheiro");
 		
 		button.addActionListener(new ActionListener() {
 
@@ -37,6 +38,18 @@ public class Panel2 extends JPanel {
 
 		});
 
+		buttonFile.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				fc.showDialog(getPanel2() , "Abrir");
+				
+			}
+			
+		});
+		
+		
 		fc.addActionListener(new ActionListener() {
 
 			@Override
@@ -55,6 +68,8 @@ public class Panel2 extends JPanel {
 		
 	}
 
-	
+	public JPanel getPanel2() {
+		return this;
+	}
 	
 }
