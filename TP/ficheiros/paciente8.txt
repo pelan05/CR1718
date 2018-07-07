@@ -1,0 +1,14 @@
+Ana Fonte
+32
+1
+7
+true
+3
+false
+false
+false
+false
+true
+true
+false
+false

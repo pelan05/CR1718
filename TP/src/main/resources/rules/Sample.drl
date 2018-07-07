@@ -120,7 +120,8 @@ end
 rule "Stage C"
 salience 85
 	when
-		$p:Paciente(getLastDiag().getHasSpread() == true, getLastDiag().getLiverWorksNormally() == true,
+		$p:Paciente(getLastDiag().getHasSpread() == true,
+		   getLastDiag().getLiverWorksNormally() == true,
 		   getStage()!=0 , getStage()!=1, getStage()!=2, getStage() != 3,
 		   getLastDiag().getNeedsHelp() == false,
 		   getLastDiag().getSevereLiverDamage() == false) 
@@ -135,7 +136,8 @@ end
 rule "Stage C FWF"
 salience 85
 	when
-		$p:Paciente(getLastDiag().getFeelsWell() == false, getLastDiag().getLiverWorksNormally() == true,
+		$p:Paciente(getLastDiag().getFeelsWell() == false,
+		   getLastDiag().getLiverWorksNormally() == true,
 		   getStage()!=0 , getStage()!=1, getStage()!=2, getStage() != 3,
 		   getLastDiag().getNeedsHelp() == false,
 		   getLastDiag().getSevereLiverDamage() == false) 
@@ -171,17 +173,26 @@ salience 84
 	};
 	
 end
-		
+
+rule "Default"
+salience 82
+	when
+		$p:Paciente(getStage() == 6)
+	then
+		modify($p){
+			setStage(2)
+		};
+end
 
 //REGRAS COMUNS
 
-//rule "Print stage"
-//salience 80
-	//when
-	//	$p:Paciente()
-	//then
-	//	System.out.println("confirmando que isto é 0 _ " + $p.getStage());
-//end
+rule "Print stage"
+salience 80
+	when
+		$p:Paciente()
+	then
+		System.out.println("estado " + $p.getStage());
+end
 
 rule "Very early stage single"
 salience 80
