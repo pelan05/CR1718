@@ -50,6 +50,7 @@ public class Panel3 extends JPanel {
 		panel3.add(texto1);
 		panel3.add(texto2);
 		panel3.add(texto3);
+		
 		panel3.add(button);
 		
 
