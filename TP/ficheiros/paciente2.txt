@@ -1,0 +1,18 @@
+Pedro Ferreira
+77
+3
+2.4
+true
+2.3
+true
+2.6
+true
+4
+true
+true
+true
+false
+false
+false
+false
+true

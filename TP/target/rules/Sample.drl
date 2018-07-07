@@ -40,8 +40,9 @@ end
 rule "Paciente tem nodulo maior ou igual a 2 cm"
 salience 90	
 	when
-		$p:Paciente ()
-		Paciente(getLastDiag().getNodulo(0).getTam() >= 2 || getLastDiag().getNodulo(1).getTam() >= 2 || getLastDiag().getNodulo(2).getTam() >= 2)
+		$p:Paciente (getLastDiag().getNodulo(0).getTam() >= 2 
+							|| getLastDiag().getNodulo(1).getTam() >= 2 
+								|| getLastDiag().getNodulo(2).getTam() >= 2)
 	then
 		if ($p.historico.get(0).getFourPhaseCT() >= 1){
 			System.out.println("HCC");
