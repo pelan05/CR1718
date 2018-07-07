@@ -243,4 +243,5 @@ salience 95
 	then
 		System.out.println("Voce é saudavel!");
 		$p.setNomeTratamento("Saudavel");
+		drools.halt();
 end
