@@ -39,7 +39,7 @@ end
 
 rule "Paciente tem nodulo maior ou igual a 2 cm"
 salience 90	
-	when
+	when//erro aqui quando nodulos != 3
 		$p:Paciente (getLastDiag().getNodulo(0).getTam() >= 2 
 							|| getLastDiag().getNodulo(1).getTam() >= 2 
 								|| getLastDiag().getNodulo(2).getTam() >= 2)
