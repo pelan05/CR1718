@@ -34,7 +34,38 @@ public class Diagnostico {
 		needsHelp = false;
 	}
 
+	public boolean checkSizeNoduloMenor(float val) {		
+		
+		for(int i = 0; i < nodulo.size(); i++) {
+
+			if(nodulo.get(i).getTam() < val) {
+				return true;		
+			}
+		}
+	return false;
+	}
 	
+	public boolean checkSizeNoduloEntre(float valMen, float valMai) {		
+		
+		for(int i = 0; i < nodulo.size(); i++) {
+
+			if(nodulo.get(i).getTam() >= valMen && nodulo.get(i).getTam() < valMai) {
+				return true;		
+			}
+		}
+	return false;
+	}
+	
+	public boolean checkSizeNoduloMaior(float val) {		
+		
+		for(int i = 0; i < nodulo.size(); i++) {
+
+			if(nodulo.get(i).getTam() >= val) {
+				return true;		
+			}
+		}
+	return false;
+	}
 	
 	public Nodulo getNodulo(int i) {
 		return nodulo.get(i);
