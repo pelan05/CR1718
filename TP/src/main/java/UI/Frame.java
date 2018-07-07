@@ -1,4 +1,4 @@
-package state_switcher;
+package UI;
 
 public class Frame {
 

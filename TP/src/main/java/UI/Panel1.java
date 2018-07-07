@@ -1,40 +1,50 @@
-package state_switcher;
+package UI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import state_switcher.ViewState;
+import UI.ViewState;
 
-/**
- * @author Ron Brash (ron.brash@gmail.com)
- * 
- *         The concept of this class is to create a panel which
- *         contains a JButton which has an inline actionListener.
- *         
- *         The action listener will change the state using a static
- *         function from the class Main.
- */
+
+
 @SuppressWarnings("serial")
 public class Panel1 extends JPanel {
 
+
+	
 	public Panel1() {
 		JPanel panel1 = new JPanel();
-		JButton button = new JButton("my button");
+		JLabel label1 = new JLabel("Escolher modo de carregar Paciente");
+		JButton button = new JButton("Manual");
 		button.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Main.changeState(ViewState.NEXT_STATE);
+				Main.changeState(ViewState.MANUAL_STATE);
 
 			}
 
 		});
+		
+		JButton button2 = new JButton("Ficheiro");
+		button.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Main.changeState(ViewState.FICHEIRO_STATE);
+
+			}
+
+		});	
+	
+		panel1.add(label1);
 		panel1.add(button);
-
+		panel1.add(button2);
+		
 		this.add(panel1);
 	}
 

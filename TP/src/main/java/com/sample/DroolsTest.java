@@ -5,19 +5,21 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import logic.*;
 import UI.InterfaceUI;
+import UI.Main;
 import java.util.*;
 
 public class DroolsTest {
 
 	public static final void main(String[] args) {
 
-		Scanner sc = new Scanner(System.in);
+		/*Scanner sc = new Scanner(System.in);
 		Paciente paciente = new Paciente();
 		
 		InterfaceUI interfaceUi = new InterfaceUI(paciente);
 		interfaceUi.start(paciente);
-		
-		
+		*/
+		Main n = new Main();
+		/*
 		try {
 			// load up the knowledge base
 			KieServices ks = KieServices.Factory.get();
@@ -36,7 +38,7 @@ public class DroolsTest {
 
 		
 		
-		sc.close();
+		sc.close();*/
 	}
 
 }
