@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import logic.Diagnostico;
+import logic.Nodulo;
 import logic.Paciente;
 
 
@@ -16,8 +18,14 @@ import logic.Paciente;
 public class Panel3 extends JPanel {
 	
 	Paciente p;
+	Float tempor;
+	String temp;
+	Diagnostico diagnostico;
 	
 	public Panel3(Paciente paciente) {
+		
+		temp = null;
+		this.tempor = (float) 0;
 		
 		GridLayout layout = new GridLayout(17, 0, 5, 5);
 		
@@ -28,8 +36,6 @@ public class Panel3 extends JPanel {
 		JTextField texto1 = new JTextField("");
 		JLabel num2 = new JLabel("Idade: ");
 		JTextField texto2 = new JTextField("");
-		JLabel num3 = new JLabel("Nodulo: ");
-		JTextField texto3 = new JTextField("");
 		JLabel num4 = new JLabel("Tamanho:");
 		JTextField texto4 = new JTextField("");
 		JLabel num5 = new JLabel("Crescimento?: ");
@@ -59,6 +65,25 @@ public class Panel3 extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				//apanhar valores JTextField:
+				p.nome = texto1.getText();
+				p.idade = Integer.parseInt(texto2.getText());
+				temp = texto4.getText();
+				temp = temp.replace(',', '.');
+				tempor = Float.valueOf(temp);
+				temp = texto5.getText();
+				diagnostico.addNodulo(new Nodulo(tempor, Boolean.parseBoolean(temp)));
+				diagnostico.fourPhaseCT = Integer.parseInt(texto6.getText());
+				diagnostico.biopsia = Boolean.parseBoolean(texto7.getText());
+				diagnostico.portalSpread = Boolean.parseBoolean(texto8.getText());
+				diagnostico.hasAssociatedDiseases = Boolean.parseBoolean(texto9.getText());
+				diagnostico.feelsWell = Boolean.parseBoolean(texto10.getText());
+				diagnostico.liverWorksNormally = Boolean.parseBoolean(texto11.getText());
+				diagnostico.hasSpread = Boolean.parseBoolean(texto12.getText());
+				diagnostico.severeLiverDamage = Boolean.parseBoolean(texto13.getText());
+				diagnostico.needsHelp = Boolean.parseBoolean(texto14.getText());
+				
 				Main.changeState(ViewState.FINAL_STATE);
 
 			}
@@ -71,8 +96,6 @@ public class Panel3 extends JPanel {
 		panel3.add(texto1);
 		panel3.add(num2);
 		panel3.add(texto2);
-		panel3.add(num3);
-		panel3.add(texto3);
 		panel3.add(num4);
 		panel3.add(texto4);
 		panel3.add(num5);
@@ -103,4 +126,5 @@ public class Panel3 extends JPanel {
 		this.add(panel3);
 	}
 
+	
 }
