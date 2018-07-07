@@ -67,7 +67,7 @@ public class Diagnostico {
 	int j = 0;
 		for(int i = 0; i < nodulo.size(); i++) {
 
-			if(nodulo.get(i).getTam() < val) {
+			if(nodulo.get(i).getTam() > val) {
 				j++;		
 			}
 		}
