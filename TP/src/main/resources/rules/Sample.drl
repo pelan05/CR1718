@@ -58,7 +58,7 @@ rule "Stage 0"
 salience 88
 	when
 		$p:Paciente(getLastDiag().getNodulos() == 1, 
-		getLastDiag().checkSizeMenor(2), 
+		getLastDiag().checkSizeNoduloMenor(2), 
 		getLastDiag().getFeelsWell() && getLastDiag().getLiverWorksNormally(),
 		!getLastDiag().getNeedsHelp(),
 		!getLastDiag().getSevereLiverDamage())
@@ -97,7 +97,7 @@ rule "Stage B"
 salience 86
 	when
 		$p:Paciente(getStage()!='0' && getStage()!='A',
-		   getLastDiag().getFeelsWell() && getLastDiag().getLiverWorksNormally()
+		   getLastDiag().getFeelsWell() && getLastDiag().getLiverWorksNormally(),
 		   getLastDiag().getNodulos() > 3,
 		   !getLastDiag().getNeedsHelp(),
 		   !getLastDiag().getSevereLiverDamage())
@@ -119,7 +119,7 @@ end
 rule "Stage D"
 salience 84
 	when
-		$p:Paciente(getLastDiag().getSevereLiverDamage || getLastDiag().getNeedsHelp
+		$p:Paciente(getLastDiag().getSevereLiverDamage || getLastDiag().getNeedsHelp,
 		   getStage()!='0' && getStage()!='A' && getStage()!='B' && getStage()!='C',
 		   !getLastDiag().getNeedsHelp(),
 		   !getLastDiag().getSevereLiverDamage()) 
@@ -241,6 +241,6 @@ salience 95
 	when
 		$p:Paciente(getLastDiag().getNodulos()==0)
 	then
-		System.out.println("You have no cancer!! :D");
-		$p.setNomeTratamento("You have no cancer!! :D");
+		System.out.println("Voce é saudavel!");
+		$p.setNomeTratamento("Saudavel");
 end
