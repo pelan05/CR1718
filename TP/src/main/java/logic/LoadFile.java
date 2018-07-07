@@ -75,6 +75,9 @@ public class LoadFile {
 	            temp = br.readLine();
 	            diagnostico.needsHelp = Boolean.parseBoolean(temp);					//needsHelp
 
+	            
+	            System.out.println(" file loaded");
+	            
 	            p.addDiagnostico(this.diagnostico);
 	            br.close();
 	            fr.close();

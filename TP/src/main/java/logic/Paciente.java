@@ -15,7 +15,6 @@ public class Paciente {
 		idade = 0;
 		historico = new ArrayList <Diagnostico> ();
 		nomeTratamento = "undefined";
-		stage = '0';
 		
 	}
 	

@@ -14,17 +14,19 @@ import logic.LoadFile;
 public class Panel2 extends JPanel {
 	
 	
+	JFileChooser fc;
+
+	
 	public Panel2() {
 		
 		boolean hasFicheiro = false;
 		
 		JLabel label1 = new JLabel("Escolher ficheiro:");
 		
-		JFileChooser fc = new JFileChooser();
+		this.fc = new JFileChooser();
 		
-
 		JPanel  panel2 = new JPanel();
-		JButton button = new JButton("AtPanel2");
+		JButton button = new JButton("OK");
 		JButton buttonFile = new JButton("Escolher Ficheiro");
 		
 		button.addActionListener(new ActionListener() {
@@ -32,8 +34,7 @@ public class Panel2 extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				Main.changeState(ViewState.FINAL_STATE);
-
+				botao1();
 			}
 
 		});
@@ -43,8 +44,7 @@ public class Panel2 extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				fc.showDialog(getPanel2() , "Abrir");
-				
+				botao2();
 			}
 			
 		});
@@ -54,8 +54,8 @@ public class Panel2 extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				File ficheiro = fc.getSelectedFile();
 				
+				ficheiro();
 			}
 
 		});
@@ -68,8 +68,25 @@ public class Panel2 extends JPanel {
 		
 	}
 
-	public JPanel getPanel2() {
-		return this;
+
+	public void botao1() {
+		System.out.println(" in botao1()");
+		Main.changeState(ViewState.FINAL_STATE);
+	
+	}
+	
+	public void botao2() {
+		System.out.println(" in botao2()");
+		fc.showDialog(this , "Abrir");
+		
+	}
+	
+	public void ficheiro() {
+
+		System.out.println(" in ficheiro()");
+		new LoadFile(fc.getSelectedFile().getPath());
+		
+		
 	}
 	
 }
