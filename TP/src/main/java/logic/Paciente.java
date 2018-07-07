@@ -67,6 +67,23 @@ public class Paciente {
 	public int getStage() {
 		return stage;
 	}
+	
+	public String returnStage() {
+		switch (stage) {
+		case 0:
+			return "Stage 0";
+		case 1:
+			return "Stage A";
+		case 2:
+			return "Stage B";
+		case 3:
+			return "Stage C";
+		case 4:
+			return "Stage D";
+		
+	}
+	return "";	
+	}
 
 	public boolean compareStage(int sta) {
 		
