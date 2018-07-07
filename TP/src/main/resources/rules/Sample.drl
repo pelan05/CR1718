@@ -8,7 +8,7 @@ import java.util.Scanner;
 rule "Paciente tem 1 nodulo menor de 1cm"
 salience 90
 	when
-		$p:Paciente (getLastDiag().getNodulos() == 1 && getLastDiag().checkSizeNoduloMenor(1))
+		$p:Paciente (getLastDiag().checkSizeNoduloMenor(1))
 	then
 		System.out.println("Repetir ultrassom em 4 meses");
 		$p.setNomeTratamento("Inconclusivo, repetir ultrassom em 4 meses");
