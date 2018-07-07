@@ -70,19 +70,20 @@ public class Panel2 extends JPanel {
 
 
 	public void botao1() {
-		
+		System.out.println(" in botao1()");
 		Main.changeState(ViewState.FINAL_STATE);
 	
 	}
 	
 	public void botao2() {
-
+		System.out.println(" in botao2()");
 		fc.showDialog(this , "Abrir");
 		
 	}
 	
 	public void ficheiro() {
 
+		System.out.println(" in ficheiro()");
 		new LoadFile(fc.getSelectedFile().getPath());
 		
 		
