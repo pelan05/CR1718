@@ -8,15 +8,14 @@ public class InterfaceUI {
 
 	Scanner sc;
 
-	String path;
 	Diagnostico diagnostico;
 	Nodulo nodulo;
 	String temp;
 	int tam;
 	String choice;
 	
-	String defaultPathNovo;
-	String defaultPathOld;
+	StringBuilder texto;
+	String defaultPath, txt, string, path;
 	
 
 	LoadFile file;
@@ -31,9 +30,10 @@ public class InterfaceUI {
 		this.tam = 0;
 		this.choice = "";
 		
-		this.defaultPathNovo = "ficheiros/paciente.txt";
+		this.texto = new StringBuilder();
+		this.defaultPath = "ficheiros/";
+		this.txt = ".txt";
 		
-		this.file = new LoadFile(paciente, defaultPathNovo);
 		
 	}
 	
@@ -46,6 +46,15 @@ public class InterfaceUI {
         	}while(!choice.equals("ficheiro") && !choice.equals("manual"));
         	
         	if(choice.equals("ficheiro")){
+        		
+        		System.out.println("Nome do ficheiro? (cuidado com Caps)");
+        		string = sc.next();
+        		
+        		texto.append(defaultPath).append(string).append(txt);
+        		path = texto.toString();
+        		
+        		this.file = new LoadFile(p, path);
+        		
         		file.load(p);
         	}else{
             	pedeTudo(p);
