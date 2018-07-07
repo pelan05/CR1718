@@ -36,18 +36,16 @@ public class LoadFile {
 	            
 	            temp = br.readLine();												//NumNodulos
 	            tam = Integer.parseInt(temp);
+	            
 	            for(int i = 0; i < tam; i++) {
 	            	
 	            	
 	            	temp = br.readLine();
-	            	temp = temp.replace(',', '.');
-	            	tempor = Float.valueOf(temp);
-	            	this.nodulo.setTam(tempor);
-	            	
-	            	
+	            	this.nodulo.setTam(Float.valueOf(temp));						//tam
 	            	
 	            	temp = br.readLine();
 		            this.nodulo.setGrowing(Boolean.parseBoolean(temp));				//isGrowing
+		            
 		            diagnostico.addNodulo(nodulo);
 	            }
 	            
