@@ -20,11 +20,11 @@ salience 90
 	when
 		$p:Paciente (getLastDiag().checkSizeNoduloEntre(1, 2) == true)
 	then
-		if ($p.historico.get(0).getFourPhaseCT() >= 2){
+		if ($p.getLastDiag().getFourPhaseCT() >= 2){
 			System.out.println("HCC3");
 			$p.getLastDiag().setResultado(true);
 		}else
-			if($p.historico.get(0).getBiopsia() == true){
+			if($p.getLastDiag().getBiopsia() == true){
 				System.out.println("HCC4");
 				$p.getLastDiag().setResultado(true);
 			}else{
