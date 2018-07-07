@@ -13,6 +13,8 @@ public class InterfaceUI {
 	String temp;
 	int tam;
 	String choice;
+	float tempor;
+	int temporary;
 	
 	StringBuilder texto;
 	String defaultPath, txt, string, path;
@@ -29,6 +31,7 @@ public class InterfaceUI {
 		this.nodulo = new Nodulo();
 		this.tam = 0;
 		this.choice = "";
+		this.tempor = 0;
 		
 		this.texto = new StringBuilder();
 		this.defaultPath = "ficheiros/";
@@ -66,47 +69,95 @@ public class InterfaceUI {
 	
 	
 	public void pedeTudo(Paciente p) {
-		System.out.println("Qual o nome do paciente?");
-		p.nome = sc.next();
-		System.out.println("Qual a idade do paciente?");
-		p.idade = sc.nextInt();
 		
+		System.out.println("Qual o nome do paciente?");
+		sc.nextLine();
+		p.nome = sc.nextLine();
+		
+		do {
+		System.out.println("Qual a idade do paciente?");
+		temporary = sc.nextInt();
+		}while(temporary < 0 || temporary > 120);
+		p.idade = temporary;
+		
+		do {
 		System.out.println("Quantos nodulos tem o paciente?");										//NumNodulos
         tam = sc.nextInt();
+		}while(tam < 0 || tam > 8);
+        
         for(int i = 0; i < tam; i++) {
-        	System.out.println("Tamanho do nodulo "+ i);
-        	this.nodulo.setTam(sc.nextFloat());
+
+        	System.out.println("Tamanho do nodulo "+ i);			//tamanho do nodulo,
+        	sc.nextLine();											//com prevençao de ',' e '.'
+        	temp = sc.nextLine();
+        	temp = temp.replace(',', '.');
+        	tempor = Float.valueOf(temp);
+        	this.nodulo.setTam(tempor);
+        	
+        	do {
         	System.out.println("O nodulo cresceu desde a ultima vez? (true/false)");
-            this.nodulo.setGrowing(sc.nextBoolean());				//isGrowing
-            diagnostico.addNodulo(nodulo);
+            temp = sc.next();
+        	}while(!temp.equals("true") && !temp.equals("false"));
+        	this.nodulo.setGrowing(Boolean.parseBoolean(temp));				//isGrowing
+            
+        	diagnostico.addNodulo(nodulo);
         }
 		
-		System.out.println("Quantos testes positivos no 4phase/CT");
-		diagnostico.fourPhaseCT = sc.nextInt();
+		do{
+        System.out.println("Quantos testes positivos no 4phase/CT");
+		temporary = sc.nextInt();
+		}while(temporary < 0 || temporary > 4);
+		diagnostico.fourPhaseCT = temporary;
 		
+		do {
 		System.out.println("A biopsia deu resultado positivo? (true/false)");
-		diagnostico.biopsia = sc.nextBoolean();
+		temp = sc.next();
+		}while(!temp.equals("true") && !temp.equals("false"));
+		diagnostico.biopsia = Boolean.parseBoolean(temp);
 		
+		do {
 		System.out.println("Portal Spread cresceu? (true/false)");
-		diagnostico.portalSpread = sc.nextBoolean();
+		temp = sc.next();
+		}while(!temp.equals("true") && !temp.equals("false"));
+		diagnostico.portalSpread = Boolean.parseBoolean(temp);
 		
+		do {
 		System.out.println("O doente tem doenças associadas? (true/false)");
-		diagnostico.hasAssociatedDiseases = sc.nextBoolean();
-		
+		temp = sc.next();
+		}while(!temp.equals("true") && !temp.equals("false"));
+		diagnostico.hasAssociatedDiseases = Boolean.parseBoolean(temp);
+
+		do {
 		System.out.println("O doente sente-se bem? (true/false)");
-		diagnostico.feelsWell = sc.nextBoolean();
+		temp = sc.next();
+		}while(!temp.equals("true") && !temp.equals("false"));
+		diagnostico.feelsWell = Boolean.parseBoolean(temp);
 		
+		do {
 		System.out.println("O figado do paciente funciona normalmente? (true/false)");
-		diagnostico.liverWorksNormally = sc.nextBoolean();
+		temp = sc.next();
+		}while(!temp.equals("true") && !temp.equals("false"));
+		diagnostico.liverWorksNormally = Boolean.parseBoolean(temp);
 		
+		do {
 		System.out.println("O cancro espalhou-se? (true/false)");
-		diagnostico.hasSpread = sc.nextBoolean();
-		
+		temp = sc.next();
+		}while(!temp.equals("true") && !temp.equals("false"));
+		diagnostico.hasSpread = Boolean.parseBoolean(temp);
+	
+		do {
 		System.out.println("Ha dano severo no figado? (true/false)");
-		diagnostico.severeLiverDamage = sc.nextBoolean();
+		temp = sc.next();
+		}while(!temp.equals("true") && !temp.equals("false"));
+		diagnostico.severeLiverDamage = Boolean.parseBoolean(temp);
 		
+		do {
 		System.out.println("O paciente precisa de ajuda para tarefas mundanas? (true/false)");
-		diagnostico.needsHelp = sc.nextBoolean();
+		temp = sc.next();
+		}while(!temp.equals("true") && !temp.equals("false"));
+		diagnostico.needsHelp = Boolean.parseBoolean(temp);
+		
+		p.addDiagnostico(this.diagnostico);
 	}
 	
 	

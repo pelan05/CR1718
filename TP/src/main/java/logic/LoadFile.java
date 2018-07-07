@@ -8,6 +8,7 @@ public class LoadFile {
 	Nodulo nodulo;
 	String temp;
 	int tam;
+	float tempor;
 	
 	
 	public LoadFile(Paciente d, String pat) {
@@ -17,6 +18,7 @@ public class LoadFile {
 		this.diagnostico = new Diagnostico();
 		this.nodulo = new Nodulo();
 		this.tam = 0;
+		this.tempor = 0;
 		
 	}
 	
@@ -35,8 +37,15 @@ public class LoadFile {
 	            temp = br.readLine();												//NumNodulos
 	            tam = Integer.parseInt(temp);
 	            for(int i = 0; i < tam; i++) {
+	            	
+	            	
 	            	temp = br.readLine();
-	            	this.nodulo.setTam(Float.valueOf(temp));						//TamNodulo
+	            	temp = temp.replace(',', '.');
+	            	tempor = Float.valueOf(temp);
+	            	this.nodulo.setTam(tempor);
+	            	
+	            	
+	            	
 	            	temp = br.readLine();
 		            this.nodulo.setGrowing(Boolean.parseBoolean(temp));				//isGrowing
 		            diagnostico.addNodulo(nodulo);
