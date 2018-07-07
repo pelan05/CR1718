@@ -12,14 +12,17 @@ public class DroolsTest {
 
 	public static final void main(String[] args) {
 
-		/*Scanner sc = new Scanner(System.in);
+
 		Paciente paciente = new Paciente();
 		
-		InterfaceUI interfaceUi = new InterfaceUI(paciente);
-		interfaceUi.start(paciente);
-		*/
-		Main n = new Main();
-		/*
+		//InterfaceUI interfaceUi = new InterfaceUI(paciente);
+		//interfaceUi.start(paciente);
+
+
+		Main n = new Main(paciente);
+
+
+/*
 		try {
 			// load up the knowledge base
 			KieServices ks = KieServices.Factory.get();
@@ -35,10 +38,7 @@ public class DroolsTest {
 			t.printStackTrace();
 
 		}
-
-		
-		
-		sc.close();*/
+*/
 	}
 
 }

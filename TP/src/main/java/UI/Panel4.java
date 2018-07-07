@@ -6,11 +6,17 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import logic.Paciente;
+
 
 @SuppressWarnings("serial")
 public class Panel4 extends JPanel {
 	
-	public Panel4() {
+	Paciente p;
+	
+	public Panel4(Paciente paciente) {
+		
+		this.p = paciente;
 		JPanel  panel4 = new JPanel();
 		JButton button = new JButton("AtPanel4");
 		button.addActionListener(new ActionListener() {

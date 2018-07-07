@@ -9,25 +9,26 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import logic.LoadFile;
+import logic.Paciente;
 
 @SuppressWarnings("serial")
 public class Panel2 extends JPanel {
 	
 	
 	JFileChooser fc;
-
+	Paciente p;
+	LoadFile file;
 	
-	public Panel2() {
+	public Panel2(Paciente paciente) {
 		
+		this.p = paciente;
 		boolean hasFicheiro = false;
 		
 		JLabel label1 = new JLabel("Escolher ficheiro:");
 		
-		this.fc = new JFileChooser();
-		
+		this.fc = new JFileChooser("C:\\Users\\pelan\\Documents\\GitHub\\CR1718\\TP\\ficheiros");
 		JPanel  panel2 = new JPanel();
 		JButton button = new JButton("OK");
-		JButton buttonFile = new JButton("Escolher Ficheiro");
 		
 		button.addActionListener(new ActionListener() {
 
@@ -39,15 +40,6 @@ public class Panel2 extends JPanel {
 
 		});
 
-		buttonFile.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				botao2();
-			}
-			
-		});
 		
 		
 		fc.addActionListener(new ActionListener() {
@@ -70,23 +62,23 @@ public class Panel2 extends JPanel {
 
 
 	public void botao1() {
-		System.out.println(" in botao1()");
+		System.out.println("DEBUG: in botao1() in Panel2.java");
+		
+		
+		
 		Main.changeState(ViewState.FINAL_STATE);
 	
 	}
 	
-	public void botao2() {
-		System.out.println(" in botao2()");
-		fc.showDialog(this , "Abrir");
-		
-	}
 	
 	public void ficheiro() {
 
-		System.out.println(" in ficheiro()");
-		new LoadFile(fc.getSelectedFile().getPath());
+		System.out.println("DEBUG: in ficheiro() in Panel2.java path: "+ fc.getSelectedFile().getPath());
 		
 		
+		file = new LoadFile(fc.getSelectedFile().getPath());
+		file.load(p);
+
 	}
 	
 }

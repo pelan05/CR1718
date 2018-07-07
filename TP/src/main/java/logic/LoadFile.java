@@ -12,6 +12,7 @@ public class LoadFile {
 	
 	public LoadFile(String pat) {
 		
+		
 		this.path = pat;
 		this.temp = null;
 		this.diagnostico = new Diagnostico();
@@ -19,7 +20,6 @@ public class LoadFile {
 		this.tempor = 0;
 		
 		
-		System.out.println("In LoadFile    path: "+ this.path);
 		
 	}
 	
@@ -79,7 +79,6 @@ public class LoadFile {
 	            diagnostico.needsHelp = Boolean.parseBoolean(temp);					//needsHelp
 
 	            
-	            System.out.println(" file loaded");
 	            
 	            p.addDiagnostico(this.diagnostico);
 	            br.close();
