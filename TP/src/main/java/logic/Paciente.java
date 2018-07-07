@@ -8,13 +8,15 @@ public class Paciente {
 	public int idade; 
 	public ArrayList<Diagnostico> historico;
 	public String nomeTratamento;
-	public char stage;							//0, A, B, C, D
+	public int stage;						//0, A, B, C, D
 	
 	public Paciente() {
 		nome = "temp";
 		idade = 0;
 		historico = new ArrayList <Diagnostico> ();
 		nomeTratamento = "undefined";
+		this.stage = 6;
+		
 		
 	}
 	
@@ -62,16 +64,26 @@ public class Paciente {
 		this.nomeTratamento = nome;
 	}
 
-	public char getStage() {
+	public int getStage() {
 		return stage;
 	}
 
-	public void setStage(char stage) {
-		//verificação 0, A, B, C, D (char)
-		//temp
-		if (stage != '0' || stage != 'A' || stage != 'B' || stage != 'C' || stage != 'D')
-			return;
-		this.stage = stage;
+	public boolean compareStage(int sta) {
+
+		System.out.println(" 1 " + sta);
+		System.out.println(" 2 " + this.stage);
+		
+		if( this.stage == sta ) {
+			return true;
+		}
+		return false;
+		
+		
+	}
+	
+	public void setStage(int sta) {
+	
+		this.stage = sta;
 	}
 
 }
