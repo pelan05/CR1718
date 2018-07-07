@@ -69,9 +69,6 @@ public class Paciente {
 	}
 
 	public boolean compareStage(int sta) {
-
-		System.out.println(" 1 " + sta);
-		System.out.println(" 2 " + this.stage);
 		
 		if( this.stage == sta ) {
 			return true;
