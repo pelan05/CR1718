@@ -29,10 +29,14 @@ public class Panel4 extends JPanel {
 		JLabel num7 = new JLabel("Tratamento Recomendado: ");
 		JLabel num8 = new JLabel(paciente.getNomeTratamento());
 		JButton button = new JButton("<<Voltar ao Início>>");
+		
+		
 		button.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				Main.changeState(ViewState.START_STATE);
 
 			}
