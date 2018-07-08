@@ -10,7 +10,7 @@ salience 90
 	when
 		$p:Paciente (getLastDiag().checkSizeNoduloMenor(1) == true)
 	then
-		//System.out.println("Repetir ultrassom em 4 meses");
+		System.out.println("Repetir ultrassom em 4 meses");
 		$p.setNomeTratamento("Inconclusivo, repetir ultrassom em 4 meses");
 		drools.halt();
 end
@@ -21,15 +21,15 @@ salience 90
 		$p:Paciente (getLastDiag().checkSizeNoduloEntre(1, 2) == true)
 	then
 		if ($p.getLastDiag().getFourPhaseCT() >= 2){
-			////System.out.println("HCC3");
+			System.out.println("HCC3");
 			$p.getLastDiag().setResultado(true);
 		}else
 			if($p.getLastDiag().getBiopsia() == true){
-				////System.out.println("HCC4");
+				System.out.println("HCC4");
 				$p.getLastDiag().setResultado(true);
 			}else{
-				//System.out.println("Inconclusivo!");
-				//System.out.println("Repetir ultrassom em 4 meses");
+				System.out.println("Inconclusivo!");
+				System.out.println("Repetir ultrassom em 4 meses");
 				$p.setNomeTratamento("Inconclusivo, repetir ultrassom em 4 meses");
 				drools.halt();
 		}
@@ -41,14 +41,14 @@ salience 90
 		$p:Paciente (getLastDiag().checkSizeNoduloMaior(2) == true)
 	then
 		if ($p.getLastDiag().getFourPhaseCT() >= 1){
-			//System.out.println("HCC1");
+			System.out.println("HCC1");
 			$p.getLastDiag().setResultado(true);
 		}else
 			if($p.getLastDiag().getBiopsia() == true){
-				//System.out.println("HCC2");
+				System.out.println("HCC2");
 				$p.getLastDiag().setResultado(true);
 			}else{
-				//System.out.println("Inconclusivo!");
+				System.out.println("Inconclusivo!");
 				$p.setNomeTratamento("Inconclusivo, repetir ultrassom em 4 meses");
 				drools.halt();
 		}
@@ -106,12 +106,13 @@ rule "Stage B"
 salience 86
 	when
 		$p:Paciente(getStage()!=0, getStage()!=1, getStage() != 2,
-		   getLastDiag().getFeelsWell() == true, getLastDiag().getLiverWorksNormally() == true,
+		   getLastDiag().getFeelsWell() == true, 
+		   getLastDiag().getLiverWorksNormally() == true,
 		   getLastDiag().getNodulos() > 3,
 		   getLastDiag().getNeedsHelp() == false,
 		   getLastDiag().getSevereLiverDamage() == false)
 	then
-
+	System.out.println("Cenas");
 	modify($p){
 		setStage(2)
 	};
@@ -191,7 +192,7 @@ salience 80
 	when
 		$p:Paciente()
 	then
-		//System.out.println("estado " + $p.getStage());
+		System.out.println("estado " + $p.getStage());
 end
 
 rule "Very early stage single"
@@ -201,16 +202,16 @@ salience 80
 		   getLastDiag().getNodulos()== 1)
 	then
 		if ($p.getLastDiag().getPortalSpread() == false){
-			//System.out.println("Recessao");
+			System.out.println("Recessao");
 			$p.setNomeTratamento("Recessao");
 			drools.halt();
 		}else
 			if ($p.getLastDiag().getHasAssociatedDiseases() == false){
-				//System.out.println("Transplante Figado CLT/LDLT");
+				System.out.println("Transplante Figado CLT/LDLT");
 				$p.setNomeTratamento("Transplante Figado CLT/LDLT");
 				drools.halt();
 			}else{
-				//System.out.println("Radiofrequency ablation RF/PEI");
+				System.out.println("Radiofrequency ablation RF/PEI");
 				$p.setNomeTratamento("RF/PEI");
 				drools.halt();
 			}
@@ -223,11 +224,11 @@ salience 77
 		   Paciente(getLastDiag().getNodulos()>1)
 	then
 		if ($p.getLastDiag().getHasAssociatedDiseases() == false){
-			//System.out.println("Transplante Figado CLT/LDLT");
+			System.out.println("Transplante Figado CLT/LDLT");
 			$p.setNomeTratamento("Transplante Figado CLT/LDLT");
 			drools.halt();
 		}else{
-			//System.out.println("Radiofrequency ablation RF/PEI");
+			System.out.println("Radiofrequency ablation RF/PEI");
 			$p.setNomeTratamento("RF/PEI");
 			drools.halt();
 		}
@@ -240,11 +241,11 @@ salience 75
 		   Paciente(getLastDiag().getNodulos()>1)
 	then
 		if ($p.getLastDiag().getHasAssociatedDiseases() == false){
-			//System.out.println("Transplante Figado CLT/LDLT");
+			System.out.println("Transplante Figado CLT/LDLT");
 			$p.setNomeTratamento("Transplante Figado CLT/LDLT");
 			drools.halt();
 		}else{
-			//System.out.println("Radiofrequency ablation RF/PEI");
+			System.out.println("Radiofrequency ablation RF/PEI");
 			$p.setNomeTratamento("RF/PEI");
 			drools.halt();
 		}
@@ -255,7 +256,7 @@ salience 72
 	when
 		$p:Paciente (compareStage(2))
 	then
-		//System.out.println("Transarterial chemoembolization for liver cancer (TACE)");
+		System.out.println("Transarterial chemoembolization for liver cancer (TACE)");
 		$p.setNomeTratamento("TACE");
 		drools.halt();
 end
@@ -265,7 +266,7 @@ salience 71
 	when
 		$p:Paciente (compareStage(3))
 	then
-		//System.out.println("Sorafenib");
+		System.out.println("Sorafenib");
 		$p.setNomeTratamento("Sorafenib");
 		drools.halt();
 end
@@ -275,7 +276,7 @@ salience 70
 	when 
 		$p:Paciente(compareStage(4))
 	then
-		//System.out.println("Melhores cuidados de fim de vida");
+		System.out.println("Melhores cuidados de fim de vida");
 		$p.setNomeTratamento("Melhores cuidados de fim de vida");
 		drools.halt();
 end
@@ -288,14 +289,14 @@ salience 100
 		$p:Paciente(getDiagnosticos() > 1)
 	then
 		if ($p.getLastDiag().getNodulo(0).getGrowing() == true){
-			//System.out.println("Investigar de acordo com o tamanho!");
+			System.out.println("Investigar de acordo com o tamanho!");
 			$p.setNomeTratamento("Investigar de acordo com o tamanho!");
 			drools.halt();
 			}
 		else
 		{
-			//System.out.println("Inconclusivo!!");
-			//System.out.println("Repetir ultrassom em 4 meses");
+			System.out.println("Inconclusivo!!");
+			System.out.println("Repetir ultrassom em 4 meses");
 			$p.setNomeTratamento("Inconclusivo, repetir ultrassom em 4 meses");
 			drools.halt();
 		}
@@ -306,7 +307,7 @@ salience 95
 	when
 		$p:Paciente(getLastDiag().getNodulos()==0)
 	then
-		//System.out.println("Voce é saudavel!");
+		System.out.println("Voce é saudavel!");
 		$p.setNomeTratamento("Saudavel");
 		drools.halt();
 end
