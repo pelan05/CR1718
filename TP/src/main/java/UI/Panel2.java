@@ -20,6 +20,7 @@ public class Panel2 extends JPanel {
 	public Panel2(Paciente paciente) {
 		
 		JLabel label1 = new JLabel("Escolher ficheiro:");
+
 		
 		this.fc = new JFileChooser("C:\\Users\\pelan\\Documents\\GitHub\\CR1718\\TP\\ficheiros");
 		JPanel  panel2 = new JPanel();

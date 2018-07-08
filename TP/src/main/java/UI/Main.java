@@ -31,7 +31,7 @@ public class Main {
 		// Sets default state
 		changeState(ViewState.START_STATE);
 
-		frame.setSize(1000, 900);
+		frame.setSize(800, 400);
 		frame.add(mpanel);
 		frame.setVisible(true);
 
