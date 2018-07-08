@@ -2,7 +2,6 @@ package UI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -19,8 +18,6 @@ public class Panel2 extends JPanel {
 	LoadFile file;
 	
 	public Panel2(Paciente paciente) {
-		
-		boolean hasFicheiro = false;
 		
 		JLabel label1 = new JLabel("Escolher ficheiro:");
 		

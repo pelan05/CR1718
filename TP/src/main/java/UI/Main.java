@@ -26,7 +26,7 @@ public class Main {
 		panel1 = new Panel1();
 		panel2 = new Panel2(p);
 		panel3 = new Panel3(p);
-		panel4 = new Panel4(p);
+		//panel4 = new Panel4(p);
 
 		// Sets default state
 		changeState(ViewState.START_STATE);
@@ -89,3 +89,4 @@ public class Main {
 	
 }
 }
+	
