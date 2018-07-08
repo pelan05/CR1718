@@ -16,12 +16,10 @@ public class Panel2 extends JPanel {
 	
 	
 	JFileChooser fc;
-	Paciente p;
 	LoadFile file;
 	
 	public Panel2(Paciente paciente) {
 		
-		this.p = paciente;
 		boolean hasFicheiro = false;
 		
 		JLabel label1 = new JLabel("Escolher ficheiro:");
@@ -34,8 +32,8 @@ public class Panel2 extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				botao1();
+
+				Main.changeState(ViewState.FINAL_STATE);
 			}
 
 		});
@@ -46,8 +44,10 @@ public class Panel2 extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				ficheiro();
+				file = new LoadFile(fc.getSelectedFile().getPath());
+				file.load(paciente);
+
+				Main.changeState(ViewState.FINAL_STATE);
 			}
 
 		});
@@ -60,21 +60,7 @@ public class Panel2 extends JPanel {
 		
 	}
 
-
-	public void botao1() {
-		
-		Main.changeState(ViewState.FINAL_STATE);
-	
-	}
 	
 	
-	public void ficheiro() {
-		
-		file = new LoadFile(fc.getSelectedFile().getPath());
-		file.load(p);
-
-		Main.changeState(ViewState.FINAL_STATE);
-	
-	}
 	
 }

@@ -23,11 +23,6 @@ public class DroolsTest {
 		Main n = new Main(paciente);
 
 
-		do {
-			
-			TimeUnit.SECONDS.sleep(1);
-		}while(false);
-		
 		
 do {
 		try {
