@@ -22,7 +22,7 @@ public class DroolsTest {
 		Main n = new Main(paciente);
 
 
-
+do {
 		try {
 			// load up the knowledge base
 			KieServices ks = KieServices.Factory.get();
@@ -39,6 +39,9 @@ public class DroolsTest {
 
 		}
 
-	}
+	
 
+}while(n.getState() != 4);
+
+	}
 }

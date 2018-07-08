@@ -73,6 +73,8 @@ public class Panel2 extends JPanel {
 		file = new LoadFile(fc.getSelectedFile().getPath());
 		file.load(p);
 
+		Main.changeState(ViewState.FINAL_STATE);
+	
 	}
 	
 }

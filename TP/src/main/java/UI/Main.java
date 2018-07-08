@@ -73,4 +73,19 @@ public class Main {
 	}
 
 
+	public int getState() {
+		switch (this.viewState) {
+		case START_STATE:
+			return 1;
+		case FICHEIRO_STATE:
+			return 2;
+		case MANUAL_STATE:
+			return 3;
+		case FINAL_STATE:
+			return 4;
+		default:
+			return 0;
+	}
+	
+}
 }
