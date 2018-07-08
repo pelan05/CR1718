@@ -1,9 +1,7 @@
 package UI;
 
-import java.awt.GridLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import logic.Paciente;
@@ -74,7 +72,7 @@ public class Main {
 
 
 	public int getState() {
-		switch (this.viewState) {
+		switch (Main.viewState) {
 		case START_STATE:
 			return 1;
 		case FICHEIRO_STATE:
@@ -88,5 +86,9 @@ public class Main {
 	}
 	
 }
+	
+	public void setPanel4(Panel4 panel) {
+		Main.panel4 = panel;
+	}
 }
 	

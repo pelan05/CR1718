@@ -6,6 +6,7 @@ import org.kie.api.runtime.KieSession;
 import logic.*;
 //import UI.InterfaceUI;
 import UI.Main;
+import UI.Panel4;
 
 public class DroolsTest {
 
@@ -22,7 +23,7 @@ public class DroolsTest {
 
 
 		
-do {
+		do {
 		try {
 			// load up the knowledge base
 			KieServices ks = KieServices.Factory.get();
@@ -41,7 +42,12 @@ do {
 
 	
 
-}while(n.getState() != 4);
+		}while(n.getState() != 4);
+
+
+	n.setPanel4(new Panel4(paciente));
+	//new Panel4(p);
+
 
 	}
 }
