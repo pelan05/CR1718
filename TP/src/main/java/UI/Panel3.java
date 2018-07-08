@@ -17,7 +17,6 @@ import logic.Paciente;
 @SuppressWarnings("serial")
 public class Panel3 extends JPanel {
 	
-	Paciente p;
 	Float tempor;
 	String temp;
 	Diagnostico diagnostico;
@@ -30,7 +29,6 @@ public class Panel3 extends JPanel {
 		
 		GridLayout layout = new GridLayout(17, 0, 5, 5);
 		
-		this.p = paciente;
 		JPanel  panel3 = new JPanel();
 		JButton button = new JButton("Pronto");
 		JLabel num1 = new JLabel("Nome: ");
@@ -68,8 +66,8 @@ public class Panel3 extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				//apanhar valores JTextField:
-				p.nome = texto1.getText();
-				p.idade = Integer.parseInt(texto2.getText());
+				paciente.setNome(texto1.getText());
+				paciente.setIdade(Integer.parseInt(texto2.getText()));
 				temp = texto4.getText();
 				temp = temp.replace(',', '.');
 				tempor = Float.valueOf(temp);
@@ -85,7 +83,7 @@ public class Panel3 extends JPanel {
 				diagnostico.severeLiverDamage = Boolean.parseBoolean(texto13.getText());
 				diagnostico.needsHelp = Boolean.parseBoolean(texto14.getText());
 				
-				p.addDiagnostico(diagnostico);
+				paciente.addDiagnostico(diagnostico);
 				
 				Main.changeState(ViewState.FINAL_STATE);
 

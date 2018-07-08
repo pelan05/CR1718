@@ -14,22 +14,20 @@ import logic.Paciente;
 @SuppressWarnings("serial")
 public class Panel4 extends JPanel {
 	
-	Paciente p;
 	
 	public Panel4(Paciente paciente) {
 		
 		GridLayout layout = new GridLayout(5, 0, 5, 5);
 		
-		this.p = paciente;
 		JPanel  panel4 = new JPanel();
 		JLabel num1 = new JLabel("Nome: ");
-		JLabel num2 = new JLabel(p.nome);
+		JLabel num2 = new JLabel(paciente.getNome());
 		JLabel num3 = new JLabel("Idade: ");
-		JLabel num4 = new JLabel(Integer.toString(p.idade));
+		JLabel num4 = new JLabel(Integer.toString(paciente.getIdade()));
 		JLabel num5 = new JLabel("Estágio BCLC: ");
-		JLabel num6 = new JLabel(p.returnStage());
+		JLabel num6 = new JLabel(paciente.returnStage());
 		JLabel num7 = new JLabel("Tratamento Recomendado: ");
-		JLabel num8 = new JLabel(p.getNomeTratamento());
+		JLabel num8 = new JLabel(paciente.getNomeTratamento());
 		JButton button = new JButton("<<Voltar ao Início>>");
 		button.addActionListener(new ActionListener() {
 
