@@ -12,12 +12,12 @@ import logic.Paciente;
 
 
 @SuppressWarnings("serial")
-public class Panel4 extends JPanel {
+public class Panel5 extends JPanel {
 	
 	
-	public Panel4(Paciente paciente) {
+	public Panel5(Paciente paciente) {
 		
-		GridLayout layout = new GridLayout(6, 0, 5, 5);
+		GridLayout layout = new GridLayout(5, 0, 5, 5);
 		
 		JPanel  panel4 = new JPanel();
 		JLabel num1 = new JLabel("Nome: ");
@@ -28,7 +28,6 @@ public class Panel4 extends JPanel {
 		JLabel num6 = new JLabel(paciente.returnStage());
 		JLabel num7 = new JLabel("Tratamento Recomendado: ");
 		JLabel num8 = new JLabel(paciente.getNomeTratamento());
-		JButton button1 = new JButton("<Update>");
 		JButton button = new JButton("<<Voltar ao Início>>");
 		
 		
@@ -39,18 +38,6 @@ public class Panel4 extends JPanel {
 				
 				
 				Main.changeState(ViewState.START_STATE);
-
-			}
-
-		});
-		
-		button1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				Main.changeState(ViewState.UPDATE_STATE);
 
 			}
 
@@ -66,8 +53,6 @@ public class Panel4 extends JPanel {
 		panel4.add(num6);
 		panel4.add(num7);
 		panel4.add(num8);
-		panel4.add(new JLabel(""));
-		panel4.add(button1);
 		panel4.add(new JLabel(""));
 		panel4.add(button);
 

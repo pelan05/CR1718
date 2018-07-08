@@ -15,6 +15,7 @@ public class Main {
 	private static JPanel panel2;
 	private static JPanel panel3;
 	private static JPanel panel4;
+	private static JPanel panel5;
 	private static JFrame frame;
 
 	public Main(Paciente p) {
@@ -25,6 +26,7 @@ public class Main {
 		panel2 = new Panel2(p);
 		panel3 = new Panel3(p);
 		panel4 = new Panel4(p);
+		panel5 = new Panel5(p);
 
 		// Sets default state
 		changeState(ViewState.START_STATE);
@@ -64,6 +66,12 @@ public class Main {
 			mpanel.revalidate();
 			mpanel.repaint();
 			break;
+		case UPDATE_STATE:
+			mpanel.removeAll();
+			mpanel.add(panel5);
+			mpanel.revalidate();
+			mpanel.repaint();
+			break;
 		default:
 			System.out.println("UNKNOWN STATE!");
 			break;
@@ -81,6 +89,8 @@ public class Main {
 			return 3;
 		case FINAL_STATE:
 			return 4;
+		case UPDATE_STATE:
+			return 5;	
 		default:
 			return 0;
 	}
@@ -89,6 +99,7 @@ public class Main {
 	
 	public void setPanel4(Panel4 panel) {
 		Main.panel4 = panel;
+		Main.panel5 = panel;
 	}
 }
 	
