@@ -7,6 +7,7 @@ import logic.*;
 import UI.InterfaceUI;
 import UI.Main;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class DroolsTest {
 
@@ -22,6 +23,12 @@ public class DroolsTest {
 		Main n = new Main(paciente);
 
 
+		do {
+			
+			TimeUnit.SECONDS.sleep(1);
+		}while(false);
+		
+		
 do {
 		try {
 			// load up the knowledge base
@@ -35,7 +42,7 @@ do {
 			// kSession.fireAllRules();
 
 		} catch (Throwable t) {
-			t.printStackTrace();
+			//t.printStackTrace();
 
 		}
 
