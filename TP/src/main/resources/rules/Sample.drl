@@ -91,7 +91,7 @@ salience 87
 	when
 		$p:Paciente(getLastDiag().getNodulos() <= 3,
 		getLastDiag().getFeelsWell() == true , getLastDiag().getLiverWorksNormally() == true,
-	    getLastDiag().checkSizeNoduloMenor(3) == true,
+	    getLastDiag().checkSizeNoduloMenor(2) == true,
 	    getStage() != 0, getStage() != 1,
 	    getLastDiag().getNeedsHelp() == false,
 		getLastDiag().getSevereLiverDamage() == false)
