@@ -22,7 +22,7 @@ public class DroolsTest {
 		Main n = new Main(paciente);
 
 
-/*
+
 		try {
 			// load up the knowledge base
 			KieServices ks = KieServices.Factory.get();
@@ -38,7 +38,7 @@ public class DroolsTest {
 			t.printStackTrace();
 
 		}
-*/
+
 	}
 
 }

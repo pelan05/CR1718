@@ -26,6 +26,7 @@ public class Panel3 extends JPanel {
 		
 		temp = null;
 		this.tempor = (float) 0;
+		diagnostico = new Diagnostico();
 		
 		GridLayout layout = new GridLayout(17, 0, 5, 5);
 		
@@ -83,6 +84,8 @@ public class Panel3 extends JPanel {
 				diagnostico.hasSpread = Boolean.parseBoolean(texto12.getText());
 				diagnostico.severeLiverDamage = Boolean.parseBoolean(texto13.getText());
 				diagnostico.needsHelp = Boolean.parseBoolean(texto14.getText());
+				
+				p.addDiagnostico(diagnostico);
 				
 				Main.changeState(ViewState.FINAL_STATE);
 
