@@ -10,7 +10,7 @@ import UI.Panel4;
 
 public class DroolsTest {
 
-	public static final void main(String[] args) {
+	public static final void main(String[] args){
 
 
 		Paciente paciente = new Paciente();
@@ -21,7 +21,7 @@ public class DroolsTest {
 
 		Main n = new Main(paciente);
 
-
+		
 		
 		do {
 		try {
@@ -40,13 +40,24 @@ public class DroolsTest {
 
 		}
 
-	
+		try {
+			
+			//debug: apagar
+			System.out.println("ZZZ" + paciente.getStage());
+			//debug
+			
+			
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
 
-		}while(n.getState() != 4);
+		}while(paciente.getStage() == 6);
 
 
 	n.setPanel4(new Panel4(paciente));
-	//new Panel4(p);
+	
 
 
 	}

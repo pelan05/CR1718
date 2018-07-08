@@ -66,8 +66,8 @@ public class Panel3 extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				//apanhar valores JTextField:
-				paciente.setNome(texto1.getText());
-				paciente.setIdade(Integer.parseInt(texto2.getText()));
+				paciente.nome = texto1.getText();
+				paciente.idade = Integer.parseInt(texto2.getText());
 				temp = texto4.getText();
 				temp = temp.replace(',', '.');
 				tempor = Float.valueOf(temp);
