@@ -1,0 +1,15 @@
+Jorge Santos
+26
+1
+1.9
+false
+
+1
+true
+false
+false
+true
+true
+false
+false
+false
