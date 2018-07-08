@@ -1,5 +1,6 @@
 package UI;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,6 +22,8 @@ public class Panel1 extends JPanel {
 		JLabel label1 = new JLabel("Escolher modo de carregar Paciente");
 		JButton button = new JButton("Manual");
 
+		GridLayout layout = new GridLayout(3, 0, 5, 5);
+		
 		button.addActionListener(new ActionListener() {
 
 			@Override
@@ -42,8 +45,16 @@ public class Panel1 extends JPanel {
 
 		});	
 	
+		panel1.setLayout(layout);
+
+		panel1.add(new JLabel());	
 		panel1.add(label1);
+		panel1.add(new JLabel());
+		panel1.add(new JLabel());
+		panel1.add(new JLabel());
+		panel1.add(new JLabel());
 		panel1.add(button);
+		panel1.add(new JLabel());
 		panel1.add(button2);
 		
 		this.add(panel1);

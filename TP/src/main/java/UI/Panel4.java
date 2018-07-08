@@ -18,7 +18,7 @@ public class Panel4 extends JPanel {
 	
 	public Panel4(Paciente paciente) {
 		
-		GridLayout layout = new GridLayout(2, 0, 5, 5);
+		GridLayout layout = new GridLayout(5, 0, 5, 5);
 		
 		this.p = paciente;
 		JPanel  panel4 = new JPanel();
@@ -27,9 +27,9 @@ public class Panel4 extends JPanel {
 		JLabel num3 = new JLabel("Idade: ");
 		JLabel num4 = new JLabel(Integer.toString(p.idade));
 		JLabel num5 = new JLabel("Estágio BCLC: ");
-		JLabel num6 = new JLabel();
+		JLabel num6 = new JLabel(p.returnStage());
 		JLabel num7 = new JLabel("Tratamento Recomendado: ");
-		JLabel num8 = new JLabel();
+		JLabel num8 = new JLabel(p.getNomeTratamento());
 		JButton button = new JButton("<<Voltar ao Início>>");
 		button.addActionListener(new ActionListener() {
 
@@ -43,6 +43,15 @@ public class Panel4 extends JPanel {
 
 		
 		panel4.setLayout(layout);
+		panel4.add(num1);
+		panel4.add(num2);
+		panel4.add(num3);
+		panel4.add(num4);
+		panel4.add(num5);
+		panel4.add(num6);
+		panel4.add(num7);
+		panel4.add(num8);
+		panel4.add(new JLabel(""));
 		panel4.add(button);
 
 		this.add(panel4);
